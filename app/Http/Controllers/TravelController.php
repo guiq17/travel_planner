@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTravelRequest;
 use App\Http\Requests\UpdateTravelRequest;
 use App\Models\Travel;
+use App\Services\TravelService;
 
 class TravelController extends Controller
 {
+    private $travel_service;
+
+    public function __construct(TravelService $travel_service)
+    {
+        $this->travel_service = $travel_service;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $user_id = $user->id;
+        $list = $this->travel_service->getTravelList($user_id);
+        return view('itinerary.list', compact('list'));
     }
 
     /**
