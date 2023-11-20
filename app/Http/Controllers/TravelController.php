@@ -21,8 +21,8 @@ class TravelController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $id = $user->id;
-        $list = $this->travel_service->getTravelList($id);
+        $user_id = $user->id;
+        $list = $this->travel_service->getTravelList($user_id);
         return view('itinerary.list', compact('list'));
     }
 

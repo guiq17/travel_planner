@@ -23,7 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($lists as $val)
+                        @foreach ($list as $val)
                             <tr class="py-3">
                                 <td class="px-4 py-3">{{ $val->title }}</td>
                                 <td class="px-4 py-3">{{ $val->start_date }}</td>
