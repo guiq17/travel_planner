@@ -21,7 +21,7 @@ class SouvenirItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('souvenir.create');
     }
 
     /**
