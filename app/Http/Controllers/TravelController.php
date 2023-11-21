@@ -6,6 +6,7 @@ use App\Http\Requests\StoreTravelRequest;
 use App\Http\Requests\UpdateTravelRequest;
 use App\Models\Travel;
 use App\Services\TravelService;
+use Illuminate\Support\Facades\DB;
 
 class TravelController extends Controller
 {
@@ -31,15 +32,28 @@ class TravelController extends Controller
      */
     public function create()
     {
-        //
+        return view('itinerary.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTravelRequest $request)
+    public function store(StoreTravelRequest $request, TravelService $travel_service)
     {
-        //
+        $title = $request->input('title');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+
+        DB::beginTransaction();
+        try {
+            $travel_service->storeTravel($title, $start_date, $end_date);
+            DB::commit();
+            return redirect()->route('travel.list')->with('success', '正常に登録されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '登録できませんでした。');
+        }
     }
 
     /**

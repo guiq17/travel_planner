@@ -31,12 +31,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/itinerary', [TravelController::class, 'index'])->name('itinerary.index');
-    Route::get('/itinerary/create', [TravelController::class, 'create'])->name('itinerary.create');
-    Route::post('/itinerary', [TravelController::class, 'store'])->name('itinerary.store');
-    Route::get('/itinerary/{id}/edit', [TravelController::class, 'edit'])->name('itinerary.edit');
-    Route::put('/itinerary/{id}', [TravelController::class, 'update'])->name('itinerary.update');
-    Route::delete('/itinerary/{id}', [TravelController::class, 'destroy'])->name('itinerary.destroy');
+    Route::get('/travel', [TravelController::class, 'index'])->name('travel.list');
+    Route::get('/travel/create', [TravelController::class, 'create'])->name('travel.create');
+    Route::post('/travel', [TravelController::class, 'store'])->name('travel.store');
+    Route::get('/travel/{id}/edit', [TravelController::class, 'edit'])->name('travel.edit');
+    Route::put('/travel/{id}', [TravelController::class, 'update'])->name('travel.update');
+    Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
 });
 
 require __DIR__.'/auth.php';

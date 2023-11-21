@@ -16,4 +16,16 @@ class TravelService
                             ->get();
         return $list;
     }
+
+    public function storeTravel($title, $start_date, $end_date)
+    {
+        $user = auth()->user();
+        $user_id = $user->id;
+        $travel = new Travel();
+        $travel->user_id = $user_id;
+        $travel->title = $title;
+        $travel->start_date = $start_date;
+        $travel->end_date = $end_date;
+        $travel->save();
+    }
 }
