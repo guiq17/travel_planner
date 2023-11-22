@@ -28,4 +28,9 @@ class TravelService
         $travel->end_date = $end_date;
         $travel->save();
     }
+
+    public function updateTravel()
+    {
+        
+    }
 }
