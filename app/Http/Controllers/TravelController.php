@@ -78,12 +78,11 @@ class TravelController extends Controller
      */
     public function update(UpdateTravelRequest $request, TravelService $travel_service)
     {
-        $title = $request->input('title');
-        $start_date = $request->input('start_date');
-        $end_date = $request->input('end_date');
+        $data = $request->only(['id', 'title', 'start_date', 'end_date']);
 
         DB::beginTransaction();
         try {
+            $travel_service->updateTravel($data);
             DB::commit();
             return redirect()->route('travel.list')->with('success', '正常に更新されました。');
         } catch (\Exception $e) {

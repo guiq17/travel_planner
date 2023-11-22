@@ -36,7 +36,7 @@ class UpdateTravelRequest extends FormRequest
             'title.max' => 'タイトルは255文字以内で入力してください。',
             'start_date.required' => '開始日を入力してください。',
             'end_date.required' => '終了日を入力してください。',
-            'end_date.after' => '終了日は開始日より後の日付を入力してください。',
+            'end_date.after_or_equal' => '終了日は開始日より後の日付を入力してください。',
         ];
     }
 }

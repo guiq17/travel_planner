@@ -12,8 +12,9 @@
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div class="container px-5 py-5 mx-auto">
             {{-- 編集フォーム --}}
-            <form action="{{ route('travel.update', ['id' => $travel->id]) }}" method="PUT">
+            <form action="{{ route('travel.update', ['id' => $travel->id]) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <input type="hidden" name="id" value="{{ $travel->id }}">
                 {{-- タイトル入力 --}}
                 <div class="mb-6">
