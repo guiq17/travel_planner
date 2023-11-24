@@ -10,7 +10,7 @@ class SouvenirItemService
     public function getSouvenirCategories()
     {
         $souvenir_categories = DB::table('souvenir_category_lists')
-                                ->select('name')
+                                ->select('id', 'name')
                                 ->get();
 
         return $souvenir_categories;
@@ -28,13 +28,13 @@ class SouvenirItemService
     public function createSouvenirItem($request)
     {
         SouvenirItem::create([
-            'souvenir_category_id',
+            'souvenir_category_id' => $request->category_id,
             'name' => $request->name,
             'quantity' => $request->quantity,
             'price' => $request->price,
             'url' => $request->url,
             'contents' => $request->contents,
-            'image'
+            // 'image'
         ]);
     }
 }

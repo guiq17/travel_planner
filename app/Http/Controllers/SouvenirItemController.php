@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\SouvenirItem;
+use Illuminate\Support\Facades\DB;
 use App\Services\SouvenirItemService;
 use App\Http\Requests\StoreSouvenirItemRequest;
 use App\Http\Requests\UpdateSouvenirItemRequest;
@@ -39,7 +41,16 @@ class SouvenirItemController extends Controller
      */
     public function store(StoreSouvenirItemRequest $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $this->souvenirItemService->createSouvenirItem($request);
+            DB::commit();
+            return redirect()->route('souvenir.create')->with('success', 'お土産を登録しました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '登録できませんでした。');
+        }
     }
 
     /**

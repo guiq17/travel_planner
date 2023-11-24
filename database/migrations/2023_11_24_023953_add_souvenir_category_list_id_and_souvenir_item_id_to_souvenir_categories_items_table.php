@@ -12,8 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('souvenir_category_item', function (Blueprint $table) {
-            $table->integer('souvenir_category_list_id')->after('travel_id');
-            $table->integer('souvenir_item_id')->after('souvenir_category_list_id');
+            $table->unsignedBigInteger('souvenir_category_list_id');
+            $table->unsignedBigInteger('souvenir_item_id');
+
+            //外部キー制約
+            $table->foreign('souvenir_category_list_id')
+                ->references('id')
+                ->on('souvenir_category_lists')
+                ->onDelete('cascade');
+            $table->foreign('souvenir_item_id')
+                ->references('id')
+                ->on('souvenir_items')
+                ->onDelete('cascade');
         });
     }
 

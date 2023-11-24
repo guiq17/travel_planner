@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     // お土産に関するルート
     Route::get('/souvenir/create', [SouvenirItemController::class, 'create'])->name('souvenir.create');
+    Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
 });
 
 require __DIR__.'/auth.php';
