@@ -20,6 +20,7 @@
                             <th class="px-4 py-3">終了日</th>
                             <th class="px-4 py-3">詳細</th>
                             <th class="px-4 py-3">編集</th>
+                            <th class="px-4 py-3">削除</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,12 @@
                                 <td class="px-4 py-3">{{ $val->end_date }}</td>
                                 <td class="px-4 py-3"><button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"><a href="">詳細</a></button></td>
                                 <td class="px-4 py-3"><button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"><a href="{{ route('travel.edit', ['id' => $val->id]) }}">編集</a></button></td>
+                                <form action="{{ route('travel.destroy', ['id' => $val->id])}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    {{-- <input type="hidden" name="id" value="{{ $val->id }} --}}
+                                    <td class="px-4 py-3"><input type="submit" value="削除" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick='return confirm("この旅程を削除しますか？")'></td>
+                                </form>
                             </tr>
                         @endforeach
                     </tbody>
