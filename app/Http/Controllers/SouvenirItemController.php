@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SouvenirItem;
+use App\Services\SouvenirItemService;
 use App\Http\Requests\StoreSouvenirItemRequest;
 use App\Http\Requests\UpdateSouvenirItemRequest;
-use App\Models\SouvenirItem;
 
 class SouvenirItemController extends Controller
 {
+    private $souvenirItemService;
+
+    public function __construct(SouvenirItemService $souvenir_item_service)
+    {
+        $this->souvenirItemService = $souvenir_item_service;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +29,9 @@ class SouvenirItemController extends Controller
      */
     public function create()
     {
-        return view('souvenir.create');
+        $souvenir_categories = $this->souvenirItemService->getSouvenirCategories();
+
+        return view('souvenir.create', compact('souvenir_categories'));
     }
 
     /**
