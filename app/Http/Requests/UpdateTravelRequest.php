@@ -11,7 +11,7 @@ class UpdateTravelRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class UpdateTravelRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'start_date' => 'required',
+            'end_date' => 'required|after_or_equal:start_date',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'タイトルを入力してください。',
+            'title.string' => 'タイトルは文字列で入力してください。',
+            'title.max' => 'タイトルは255文字以内で入力してください。',
+            'start_date.required' => '開始日を入力してください。',
+            'end_date.required' => '終了日を入力してください。',
+            'end_date.after_or_equal' => '終了日は開始日より後の日付を入力してください。',
         ];
     }
 }

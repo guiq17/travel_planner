@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SouvenirItemController;
+use App\Models\Travel;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TravelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,15 @@ Route::middleware('auth')->group(function () {
     // お土産に関するルート
     Route::get('/souvenir/create', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/travel', [TravelController::class, 'index'])->name('travel.list');
+    Route::get('/travel/create', [TravelController::class, 'create'])->name('travel.create');
+    Route::post('/travel', [TravelController::class, 'store'])->name('travel.store');
+    Route::get('/travel/{id}', [TravelController::class, 'edit'])->name('travel.edit');
+    Route::put('/travel/{id}', [TravelController::class, 'update'])->name('travel.update');
+    Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
 });
 
 require __DIR__.'/auth.php';
