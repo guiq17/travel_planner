@@ -5,15 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
 use App\Models\Schedule;
+use App\Services\ScheduleService;
+use Illuminate\Support\Facades\DB;
 
 class ScheduleController extends Controller
 {
+    // private $schedule_service;
+
+    // public function __construct(ScheduleService $schedule_service)
+    // {
+    //     $this->schedule_service = $schedule_service;
+    // }
+    //上記書くとエラーになる
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        //スケジュール一覧表示
+        return view('schedule.index');
     }
 
     /**
@@ -21,7 +31,8 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        //
+        //新規スケジュール作成画面のビュー
+        return view('schedule.create');
     }
 
     /**
@@ -29,7 +40,7 @@ class ScheduleController extends Controller
      */
     public function store(StoreScheduleRequest $request)
     {
-        //
+        //post部分
     }
 
     /**
@@ -45,7 +56,7 @@ class ScheduleController extends Controller
      */
     public function edit(Schedule $schedule)
     {
-        //
+        //編集のビュー
     }
 
     /**
@@ -53,7 +64,7 @@ class ScheduleController extends Controller
      */
     public function update(UpdateScheduleRequest $request, Schedule $schedule)
     {
-        //
+        //編集のポスト
     }
 
     /**
@@ -61,6 +72,6 @@ class ScheduleController extends Controller
      */
     public function destroy(Schedule $schedule)
     {
-        //
+        //削除
     }
 }
