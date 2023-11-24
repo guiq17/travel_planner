@@ -4,7 +4,7 @@
             いま、旅に出よう
         </h2>
     </x-slot>
-    <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style="background-image: url('/images/bg_travel2.jpeg');">
+    <div class="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style="background-image: url('/images/bg_travel.jpeg');">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-center">
                 <h2 class="text-3xl font-semibold">旅のしおりを作成しよう</h2>
