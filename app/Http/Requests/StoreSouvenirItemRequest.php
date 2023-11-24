@@ -11,7 +11,7 @@ class StoreSouvenirItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class StoreSouvenirItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'souvenir_category_id' => 'required|integer',
+            'name' => 'required|string',
+            'quantity' => 'integer',
+            'price' => 'integer',
+            'url' => 'url',
+            'contents' => 'string',
+            'image' => '',
         ];
     }
 }

@@ -27,14 +27,17 @@ class SouvenirItemService
 
     public function createSouvenirItem($request)
     {
-        SouvenirItem::create([
-            'souvenir_category_id' => $request->category_id,
-            'name' => $request->name,
-            'quantity' => $request->quantity,
-            'price' => $request->price,
-            'url' => $request->url,
-            'contents' => $request->contents,
+        $souvenir = new SouvenirItem();
+
+            $souvenir->souvenir_category_list_id = $request->category_id;
+            $souvenir->name = $request->name;
+            $souvenir->quantity = $request->quantity;
+            $souvenir->price = $request->price;
+            $souvenir->url = $request->url;
+            $souvenir->contents = $request->contents;
             // 'image'
-        ]);
+            $souvenir->save();
+
+            return $souvenir;
     }
 }
