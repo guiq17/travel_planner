@@ -32,5 +32,9 @@
                 {{ $slot }}
             </main>
         </div>
+        <footer class="bg-white shadow">
+            @component('components.footer')
+            @endcomponent
+        </footer>
     </body>
 </html>
