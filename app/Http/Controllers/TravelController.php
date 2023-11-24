@@ -21,8 +21,7 @@ class TravelController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        $user_id = $user->id;
+        $user_id = auth()->user()->id;
         $list = $this->travel_service->getTravelList($user_id);
         return view('itinerary.list', compact('list'));
     }
@@ -67,17 +66,30 @@ class TravelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Travel $travel)
+    public function edit($id)
     {
-        //
+        $user_id = auth()->user()->id;
+        $travel = $this->travel_service->getTravelList($user_id)->where('id', $id)->first();
+        return view('itinerary.edit', compact('travel'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTravelRequest $request, Travel $travel)
+    public function update(UpdateTravelRequest $request, TravelService $travel_service)
     {
-        //
+        $data = $request->only(['id', 'title', 'start_date', 'end_date']);
+
+        DB::beginTransaction();
+        try {
+            $travel_service->updateTravel($data);
+            DB::commit();
+            return redirect()->route('travel.list')->with('success', '正常に更新されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '更新できませんでした。');
+        }
     }
 
     /**

@@ -28,4 +28,15 @@ class TravelService
         $travel->end_date = $end_date;
         $travel->save();
     }
+
+    public function updateTravel($data)
+    {
+        DB::table('travel')
+            ->where('id', $data['id'])
+            ->update([
+                'title' => $data['title'],
+                'start_date' => $data['start_date'],
+                'end_date' => $data['end_date'],
+            ]);
+    }
 }

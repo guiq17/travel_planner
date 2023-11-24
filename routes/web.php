@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/travel', [TravelController::class, 'index'])->name('travel.list');
     Route::get('/travel/create', [TravelController::class, 'create'])->name('travel.create');
     Route::post('/travel', [TravelController::class, 'store'])->name('travel.store');
-    Route::get('/travel/{id}/edit', [TravelController::class, 'edit'])->name('travel.edit');
+    Route::get('/travel/{id}', [TravelController::class, 'edit'])->name('travel.edit');
     Route::put('/travel/{id}', [TravelController::class, 'update'])->name('travel.update');
     Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
 });
