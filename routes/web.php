@@ -5,7 +5,7 @@ use App\Models\Travel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TravelController;
 use App\Http\Controllers\MemoController;
-
+use App\Http\Controllers\ScheduleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +40,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
     Route::get('/memo/create', [MemoController::class, 'create'])->name('memo.create');
     Route::post('/memo/store', [MemoController::class, 'store'])->name('memo.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
+    Route::get('/schedule/create', [ScheduleController::class, 'create'])->name('schedule.create');
+    Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
+    Route::get('/schedule/{id}', [ScheduleController::class, 'edit'])->name('schedule.edit');
+    Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
+    Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
 });
 
 require __DIR__.'/auth.php';
