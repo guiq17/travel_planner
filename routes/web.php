@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Travel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TravelController;
+use App\Http\Controllers\MemoController;
 use App\Http\Controllers\ScheduleController;
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/travel/{id}', [TravelController::class, 'edit'])->name('travel.edit');
     Route::put('/travel/{id}', [TravelController::class, 'update'])->name('travel.update');
     Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
+    Route::get('/memo/create/{travel_id}', [MemoController::class, 'create'])->name('memo.create');
+    Route::post('/memo/store', [MemoController::class, 'store'])->name('memo.store');
 });
 
 Route::middleware('auth')->group(function () {
