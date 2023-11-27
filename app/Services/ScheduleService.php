@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class ScheduleService
 {
-  public function storeSchedule($date, $start_time, $end_time,$event,$url,$image,$icon)
+  public function storeSchedule($date,$travel_id, $start_time, $end_time,$event,$url,$image,$icon)
     {
         $user = auth()->user();
         $schedule = new Schedule();
-        
+        $travel_id->travel_id = $travel_id;
         $schedule->date = $date;
         $schedule->start_time = $start_time;
         $schedule->end_time = $end_time;

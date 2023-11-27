@@ -19,19 +19,19 @@ class ScheduleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($travel_id)
     {
         //スケジュール一覧表示
-        return view('schedule.index');
+        return view('schedule.index',compact('travel_id'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($travel_id)
     {
         //新規スケジュール作成画面のビュー
-        return view('schedule.create');
+        return view('schedule.create',compact('travel_id'));
     }
 
     /**
@@ -47,6 +47,7 @@ class ScheduleController extends Controller
         $url = $request->input('url');
         $image = $request->input('image');
         $icon = $request->input('icon');
+        $travel_id = $request->input('travel_id');
 
         DB::beginTransaction();
         try {
