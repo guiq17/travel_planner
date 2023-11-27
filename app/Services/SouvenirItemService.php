@@ -30,7 +30,7 @@ class SouvenirItemService
         $souvenir = new SouvenirItem();
 
             $souvenir->souvenir_category_list_id = $request->category_id;
-            $souvenir->name = $request->name;
+            $souvenir->name = $request->souvenir_name;
             $souvenir->quantity = $request->quantity;
             $souvenir->price = $request->price;
             $souvenir->url = $request->url;
