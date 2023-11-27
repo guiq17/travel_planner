@@ -154,7 +154,7 @@ return [
     */
 
     'attributes' => [
-        'souvenir_category_id' => 'カテゴリー',
+        'category_id' => 'カテゴリー',
         'souvenir_name' => '品名',
         'quantity' => '個数',
         'price' => '価格',

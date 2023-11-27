@@ -22,8 +22,8 @@ class StoreSouvenirItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'souvenir_category_id' => 'required|numeric',
-            'name' => 'required|string',
+            'category_id' => 'required|numeric',
+            'souvenir_name' => 'required|string',
             'quantity' => 'required|numeric',
             'price' => 'nullable|numeric',
             'url' => 'nullable|url',
