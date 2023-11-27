@@ -22,13 +22,13 @@ class StoreSouvenirItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'souvenir_category_id' => 'required|integer',
+            'souvenir_category_id' => 'required|numeric',
             'name' => 'required|string',
-            'quantity' => 'integer',
-            'price' => 'integer',
-            'url' => 'url',
-            'contents' => 'string',
-            'image' => '',
+            'quantity' => 'required|numeric',
+            'price' => 'nullable|numeric',
+            'url' => 'nullable|url',
+            'contents' => 'nullable|max:255',
+            'image' => 'image|max:1024',
         ];
     }
 }
