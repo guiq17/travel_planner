@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMemoRequest;
 use App\Http\Requests\UpdateMemoRequest;
 use App\Models\Memo;
+use App\Services\MemoService;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MemoController extends Controller
 {
+    private $memo_service;
+    public function __construct(MemoService $memo_service) {
+        $this->memo_service = $memo_service;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +28,7 @@ class MemoController extends Controller
      */
     public function create()
     {
-        //
+        return view('memos.create');
     }
 
     /**
@@ -29,7 +36,16 @@ class MemoController extends Controller
      */
     public function store(StoreMemoRequest $request)
     {
-        //
+        $note = $request->note;
+        $url = $request->url;
+        try {
+            $this->memo_service->createMemo($note,$url);
+            return view('memos.create')->with('success', '正常に登録されました。');
+        }catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '登録できませんでした。');
+        }
     }
 
     /**
