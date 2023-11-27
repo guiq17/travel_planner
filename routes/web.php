@@ -28,9 +28,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::middleware('auth')->group(function () {
+    // しおりの大枠
     Route::get('/travel', [TravelController::class, 'index'])->name('travel.list');
     Route::get('/travel/create', [TravelController::class, 'create'])->name('travel.create');
     Route::post('/travel', [TravelController::class, 'store'])->name('travel.store');
