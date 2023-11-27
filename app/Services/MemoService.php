@@ -8,10 +8,10 @@ use Illuminate\Support\Carbon;
 
 class MemoService
 {
-    public function createMemo($note,$url) 
+    public function createMemo($travel_id,$note,$url) 
     {
         DB::table('memos')->insert([
-            'travel_id' => 1,
+            'travel_id' => $travel_id,
             'note' => $note,
             'url' => $url,
             'created_at' => Carbon::now(),

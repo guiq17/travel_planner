@@ -26,9 +26,9 @@ class MemoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($travel_id)
     {
-        return view('memos.create');
+        return view('memos.create',compact('travel_id'));
     }
 
     /**
@@ -36,11 +36,14 @@ class MemoController extends Controller
      */
     public function store(StoreMemoRequest $request)
     {
+        $travel_id = $request->travel_id;
         $note = $request->note;
         $url = $request->url;
+        DB::beginTransaction();
         try {
-            $this->memo_service->createMemo($note,$url);
-            return view('memos.create')->with('success', '正常に登録されました。');
+            $this->memo_service->createMemo($travel_id,$note,$url);
+            DB::commit();
+            return redirect()->route('memo.create', $travel_id)->with('success', '正常に登録されました。');
         }catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error: ' . $e->getMessage());

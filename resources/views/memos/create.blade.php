@@ -13,6 +13,7 @@
         <div class="container px-5 py-5 mx-auto">
             <form action="{{ route('memo.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
                 @csrf
+                <input type="hidden" value="{{ $travel_id }}" name="travel_id">
                 <div class="mb-6">
                     <label for="title" class="block text-lg font-medium text-gray-700 pd-4">ノート</label>
                     <textarea class="w-full p-2 rounded-md border border-gray-300" name="note" cols="30" rows="10" placeholder="ノート入力">{{ old('note') }}</textarea>

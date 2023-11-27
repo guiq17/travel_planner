@@ -19,10 +19,10 @@ class ScheduleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($travel_id)
     {
         //スケジュール一覧表示
-        return view('schedule.index');
+        return view('schedule.index',compact('travel_id'));
     }
 
     /**
