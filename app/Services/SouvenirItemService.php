@@ -35,7 +35,12 @@ class SouvenirItemService
             $souvenir->price = $request->price;
             $souvenir->url = $request->url;
             $souvenir->contents = $request->contents;
-            // 'image'
+            if (request('image')){
+                $name = request()->file('image')->getClientOriginalName();
+                request()->file('image')->move('storage/images', $name);
+                $souvenir->image = $name;
+            }
+    
             $souvenir->save();
 
             return $souvenir;
