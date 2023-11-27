@@ -39,4 +39,22 @@ class TravelService
                 'end_date' => $data['end_date'],
             ]);
     }
+
+    public function destroyTravel($id)
+    {
+        DB::table('travel')
+            ->where('id', $id)
+            ->update([
+                'deleted_at' => \Carbon\Carbon::now(),
+            ]);
+    }
+
+    public function destroySchedule($travel_id)
+    {
+        DB::table('schedules')
+            ->where('travel_id', $travel_id)
+            ->update([
+                'deleted_at' => \Carbon\Carbon::now(),
+            ]);
+    }
 }
