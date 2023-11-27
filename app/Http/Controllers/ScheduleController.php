@@ -10,13 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class ScheduleController extends Controller
 {
-    // private $schedule_service;
+    private $schedule_service;
 
-    // public function __construct(ScheduleService $schedule_service)
-    // {
-    //     $this->schedule_service = $schedule_service;
-    // }
-    //上記書くとエラーになる
+    public function __construct(ScheduleService $schedule_service)
+    {
+        $this->schedule_service = $schedule_service;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,9 +37,27 @@ class ScheduleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreScheduleRequest $request)
+    public function store(StoreScheduleRequest $request , ScheduleService $schedule_service)
     {
         //post部分
+        $date = $request->input('date');
+        $start_time = $request->input('start_time');
+        $end_time = $request->input('end_time');
+        $event = $request->input('event');
+        $url = $request->input('url');
+        $image = $request->input('image');
+        $icon = $request->input('icon');
+
+        DB::beginTransaction();
+        try {
+            $schedule_service->storeSchedule($date, $start_time, $end_time,$event,$url,$image,$icon);
+            DB::commit();
+            return redirect()->route('schedule.index')->with('success', '正常に登録されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '登録できませんでした。');
+        }
     }
 
     /**

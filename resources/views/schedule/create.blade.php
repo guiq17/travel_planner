@@ -12,12 +12,12 @@
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div class="container px-5 py-5 mx-auto">
             {{-- 新規スケジュール登録フォーム --}}
-            <form action="{{ route('travel.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
+            <form action="{{ route('schedule.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
                 @csrf
                 {{-- 日付 --}}
                 <div class="mb-6">
-                    <label for="title" class="block text-lg font-medium text-gray-700 pd-4">日付</label>
-                    <input type="text" name="title" value="{{ old('title') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
+                    <label for="date" class="block text-lg font-medium text-gray-700 pd-4">日付</label>
+                    <input type="text" name="date" value="{{ old('date') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
                 </div>
                 {{-- 開始時間入力 --}}
                 <div class="mb-6">
@@ -31,19 +31,18 @@
                 </div>
                 {{-- 内容 --}}
                 <div class="mb-6">
-                    <label for="start_time" class="block text-lg font-medium text-gray-700">内容</label>
-                    <input type="text" name="start_time" value="{{ old('start_date') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="内容を記載してください(例：持ち物、特記事項など">
+                    <label for="event" class="block text-lg font-medium text-gray-700">内容</label>
+                    <input type="text" name="event" value="{{ old('event') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="内容を記載してください(例：持ち物、特記事項など">
                 </div>
                 {{-- 参考HP --}}
                 <div class="mb-6">
-                    <label for="start_time" class="block text-lg font-medium text-gray-700">参考HP</label>
-                    <input type="text" name="start_time" value="{{ old('start_date') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="URL入力(例http://www.gogle.co.jp)">
+                    <label for="url" class="block text-lg font-medium text-gray-700">参考HP</label>
+                    <input type="text" name="url" value="{{ old('url') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="URL入力(例http://www.gogle.co.jp)">
                 </div>
                 {{-- 画像 --}}
                 <div class="mb-6">
-                  <label for="start_time" class="block text-lg font-medium text-gray-700">画像</label>
+                  <label for="image" class="block text-lg font-medium text-gray-700">画像</label>
                   <input type="file" name="image">
-                  <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">添付する</button>
                 </div>
                 {{-- アイコン --}}
                 <div class="mb-6 checkbox-icon">
