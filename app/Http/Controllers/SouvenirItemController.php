@@ -29,11 +29,11 @@ class SouvenirItemController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($travel_id)
     {
         $souvenir_categories = $this->souvenirItemService->getSouvenirCategories();
 
-        return view('souvenir.create', compact('souvenir_categories'));
+        return view('souvenir.create', compact('travel_id', 'souvenir_categories'));
     }
 
     /**
@@ -41,11 +41,13 @@ class SouvenirItemController extends Controller
      */
     public function store(StoreSouvenirItemRequest $request)
     {
+        $travel_id = $request->travel_id;
         DB::beginTransaction();
         try {
-            $this->souvenirItemService->createSouvenirItem($request);
+            $souvenir = $this->souvenirItemService->createSouvenirItem($request);
+            $this->souvenirItemService->createSouvenirCategoryItem($request, $souvenir);
             DB::commit();
-            return redirect()->route('souvenir.create')->with('success', 'お土産を登録しました。');
+            return redirect()->route('souvenir.create', $travel_id)->with('success', 'お土産を登録しました。');
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error('Error: ' . $e->getMessage());

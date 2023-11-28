@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // お土産に関するルート
-    Route::get('/souvenir/create', [SouvenirItemController::class, 'create'])->name('souvenir.create');
+    Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
 });
 

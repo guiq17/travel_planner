@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\SouvenirItem;
 use Illuminate\Support\Facades\DB;
+use App\Models\SouvenirCategoryItem;
 
 class SouvenirItemService
 {
@@ -29,20 +30,31 @@ class SouvenirItemService
     {
         $souvenir = new SouvenirItem();
 
-            $souvenir->souvenir_category_list_id = $request->category_id;
-            $souvenir->name = $request->souvenir_name;
-            $souvenir->quantity = $request->quantity;
-            $souvenir->price = $request->price;
-            $souvenir->url = $request->url;
-            $souvenir->contents = $request->contents;
-            if (request('image')){
-                $name = request()->file('image')->getClientOriginalName();
-                request()->file('image')->move('storage/images', $name);
-                $souvenir->image = $name;
-            }
-    
-            $souvenir->save();
+        $souvenir->souvenir_category_list_id = $request->category_id;
+        $souvenir->name = $request->souvenir_name;
+        $souvenir->quantity = $request->quantity;
+        $souvenir->price = $request->price;
+        $souvenir->url = $request->url;
+        $souvenir->contents = $request->contents;
+        if (request('image')){
+            $name = request()->file('image')->getClientOriginalName();
+            request()->file('image')->move('storage/images', $name);
+            $souvenir->image = $name;
+        }   
+        $souvenir->save();
 
-            return $souvenir;
+        return $souvenir;
+    }
+
+    public function createSouvenirCategoryItem($request, $souvenir)
+    {
+        $souvenir_category_item = new SouvenirCategoryItem();
+
+        $souvenir_category_item->travel_id = $request->travel_id;
+        $souvenir_category_item->souvenir_category_list_id = $request->category_id;
+        $souvenir_category_item->souvenir_item_id = $souvenir->id;
+        $souvenir_category_item->save();
+
+        return $souvenir_category_item;
     }
 }
