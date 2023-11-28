@@ -16,11 +16,15 @@
                 <table class="table-auto whitespace-no-wrap">
                     <thead>
                         <tr class="border-b">
-                            <th class="px-4 py-3">タイトル</th>
-                            <th class="px-4 py-3">開始日</th>
-                            <th class="px-4 py-3">終了日</th>
-                            <th class="px-4 py-3">詳細</th>
+                            <th class="px-4 py-3">日付</th>
+                            <th class="px-4 py-3">開始時間</th>
+                            <th class="px-4 py-3">終了時間</th>
+                            <th class="px-4 py-3">内容</th>
+                            <th class="px-4 py-3">参考HP</th>
+                            <th class="px-4 py-3">画像</th>
+                            <th class="px-4 py-3">アイコン</th>
                             <th class="px-4 py-3">編集</th>
+                            <th class="px-4 py-3">削除</th>
                         </tr>
                     </thead>
                 </table>
