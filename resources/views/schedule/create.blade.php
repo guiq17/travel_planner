@@ -14,10 +14,11 @@
             {{-- 新規スケジュール登録フォーム --}}
             <form action="{{ route('schedule.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
                 @csrf
+                <input type="hidden" value="{{ $travel_id }}" name="travel_id">
                 {{-- 日付 --}}
                 <div class="mb-6">
                     <label for="date" class="block text-lg font-medium text-gray-700 pd-4">日付</label>
-                    <input type="text" name="date" value="{{ old('date') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
+                    <input type="date" name="date" value="{{ old('date') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
                 </div>
                 {{-- 開始時間入力 --}}
                 <div class="mb-6">

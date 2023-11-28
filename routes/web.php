@@ -40,9 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
     Route::get('/memo/create/{travel_id}', [MemoController::class, 'create'])->name('memo.create');
     Route::post('/memo/store', [MemoController::class, 'store'])->name('memo.store');
-});
-
-Route::middleware('auth')->group(function () {
     Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
     Route::get('/schedule/create/{travel_id}', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
