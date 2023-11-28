@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ScheduleSeeder::class);
         $this->call(PackingCategorySeeder::class);
         $this->call(PackingItemSeeder::class);
+        $this->call(PackingCategoryItemSeeder::class);
         $this->call(SouvenirCategorySeeder::class);
         $this->call(SouvenirItemSeeder::class);
         $this->call(MemoSeeder::class);
