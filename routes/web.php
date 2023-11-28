@@ -31,20 +31,20 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // お土産に関するルート
-    Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
-    Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
-});
-
-Route::middleware('auth')->group(function () {
+    // しおりの大枠
     Route::get('/travel', [TravelController::class, 'index'])->name('travel.list');
     Route::get('/travel/create', [TravelController::class, 'create'])->name('travel.create');
     Route::post('/travel', [TravelController::class, 'store'])->name('travel.store');
     Route::get('/travel/{id}', [TravelController::class, 'edit'])->name('travel.edit');
     Route::put('/travel/{id}', [TravelController::class, 'update'])->name('travel.update');
     Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
+    Route::get('/memo/{travel_id}', [MemoController::class, 'index'])->name('memo.index');
     Route::get('/memo/create/{travel_id}', [MemoController::class, 'create'])->name('memo.create');
     Route::post('/memo/store', [MemoController::class, 'store'])->name('memo.store');
+
+    // お土産に関するルート
+    Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
+    Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
 });
 
 Route::middleware('auth')->group(function () {

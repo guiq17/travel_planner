@@ -18,9 +18,10 @@ class MemoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($travel_id)
     {
-        //
+        $memos = $this->memo_service->memoList($travel_id);
+        return view('memos.index', compact('memos', 'travel_id'));
     }
 
     /**
@@ -41,13 +42,15 @@ class MemoController extends Controller
         $url = $request->url;
         DB::beginTransaction();
         try {
-            $this->memo_service->createMemo($travel_id,$note,$url);
+            $this->memo_service->createMemo($travel_id, $note, $url);
             DB::commit();
-            return redirect()->route('memo.create', $travel_id)->with('success', '正常に登録されました。');
-        }catch (\Exception $e) {
+            return redirect()->route('memo.create', $travel_id)->with('success', 'メモが正常に登録されました。');
+        } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error: ' . $e->getMessage());
-            return redirect()->back()->with('error', '登録できませんでした。');
+            Log::error('File: ' . $e->getFile());
+            Log::error('Line: ' . $e->getLine());
+            return redirect()->back()->with('error', 'メモの登録中にエラーが発生しました。');
         }
     }
 
