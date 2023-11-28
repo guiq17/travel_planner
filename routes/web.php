@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/travel/{id}', [TravelController::class, 'edit'])->name('travel.edit');
     Route::put('/travel/{id}', [TravelController::class, 'update'])->name('travel.update');
     Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
+    Route::get('/memo/{travel_id}', [MemoController::class, 'index'])->name('memo.index');
     Route::get('/memo/create/{travel_id}', [MemoController::class, 'create'])->name('memo.create');
     Route::post('/memo/store', [MemoController::class, 'store'])->name('memo.store');
 });
