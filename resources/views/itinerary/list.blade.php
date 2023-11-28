@@ -28,7 +28,7 @@
                             <td class="w-1/3 px-4 py-3 text-center">{{ $val->title }}</td>
                             <td class="w-1/6 px-4 py-3 text-center">{{ $val->start_date }}</td>
                             <td class="w-1/6 px-4 py-3 text-center">{{ $val->end_date }}</td>
-                            <td class="w-1/10 px-4 py-3 text-center"><button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"><a href="">詳細</a></button></td>
+                            <td class="w-1/10 px-4 py-3 text-center"><button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"><a href="{{ route('schedule.index', ['travel_id' => $val->id]) }}">詳細</a></button></td>
                             <td class="w-1/10 px-4 py-3 text-center"><button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"><a href="{{ route('travel.edit', ['id' => $val->id]) }}">編集</a></button></td>
                             <form action="{{ route('travel.destroy', ['id' => $val->id])}}" method="POST">
                                 @csrf
