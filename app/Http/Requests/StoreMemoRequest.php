@@ -11,7 +11,7 @@ class StoreMemoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class StoreMemoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'note' => 'required|string|max:255',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'note.required' => 'ノートを入力してください。',
+            'note.string' => 'ノートは文字列で入力してください。',
+            'note.max' => 'ノートは255文字以内で入力してください。',
         ];
     }
 }
