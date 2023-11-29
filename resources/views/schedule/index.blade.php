@@ -28,6 +28,19 @@
                             <th class="px-4 py-3">削除</th>
                         </tr>
                     </thead>
+                    @foreach ($schedules as $schedule)
+                        <tr class="border-b">
+                            <td class="px-4 py-3">{{ $schedule->date }}</td>
+                            <td class="px-4 py-3">{{ $schedule->start_time }}</td>
+                            <td class="px-4 py-3">{{ $schedule->end_time }}</td>
+                            <td class="px-4 py-3">{{ $schedule->event }}</td>
+                            <td class="px-4 py-3">{{ $schedule->url }}</td>
+                            <td class="px-4 py-3">{{ $schedule->image }}</td>
+                            <td class="px-4 py-3">{{ $schedule->icon }}</td>
+                            <td><a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.edit', ['id' => $schedule->id, 'travel_id' => $travel_id]) }}">編集</a></td>
+                            <td><a type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.edit', ['id' => $schedule->id, 'travel_id' => $travel_id]) }}">削除</a></td>
+                        </tr>
+                        @endforeach
                 </table>
             </div>
         </div>

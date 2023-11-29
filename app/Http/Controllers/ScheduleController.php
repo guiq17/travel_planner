@@ -21,8 +21,8 @@ class ScheduleController extends Controller
      */
     public function index($travel_id)
     {
-        //スケジュール一覧表示
-        return view('schedule.index',compact('travel_id'));
+        $schedules = $this->schedule_service->scheduleList($travel_id);
+        return view('schedule.index', compact('schedules', 'travel_id'));
     }
 
     /**

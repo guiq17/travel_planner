@@ -8,6 +8,12 @@ use Illuminate\Support\Carbon;
 
 class ScheduleService
 {
+  public function scheduleList($travel_id)
+  {
+      $schedule = DB::table('schedules')->where('travel_id', $travel_id)->get();
+      return $schedule;
+  }
+
   public function storeSchedule($travel_id,$date, $start_time, $end_time,$event,$url,$image,$icon)
     {
       DB::table('schedules')->insert([
