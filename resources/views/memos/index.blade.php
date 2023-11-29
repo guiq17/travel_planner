@@ -20,8 +20,8 @@
                         <tr class="border-b">
                             <td class="px-4 py-3">{{ $memo->note }}</td>
                             <td class="px-4 py-3">{{ $memo->url }}</td>
-                            <td><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">編集</button></td>
-                            <td><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">削除</button></td>
+                            <td><a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.edit', ['id' => $memo->id, 'travel_id' => $travel_id]) }}">編集</a></td>
+                            <td><a type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.edit', ['id' => $memo->id, 'travel_id' => $travel_id]) }}">削除</a></td>
                         </tr>
                         @endforeach
                     </thead>
