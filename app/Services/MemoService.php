@@ -40,4 +40,9 @@ class MemoService
         $memo = $this->getMemo($id);
         return $memo;
     }
+
+    public function deleteMemo($id)
+    {
+        DB::table('memos')->where('id',$id)->delete();
+    }
 }
