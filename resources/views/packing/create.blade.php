@@ -30,7 +30,7 @@
                 </div>
                 {{-- 保存ボタン --}}
                 <div class="mt-20">
-                    <button type="submit" class="inline-block px-4 py-2 mr-2 bg-white text-red-500 border-2 border-red-500 rounded-md hover:bg-red-500 hover:text-white"><a href="{{ route('travel.list') }}">キャンセル</a></button>
+                    <button type="submit" class="inline-block px-4 py-2 mr-2 bg-white text-red-500 border-2 border-red-500 rounded-md hover:bg-red-500 hover:text-white"><a href="{{ route('packing.index', ['travel_id' => $travel_id]) }}">キャンセル</a></button>
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">保存</button>
                 </div>
             </form>
