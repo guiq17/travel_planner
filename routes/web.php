@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
-    Route::get('/schedule/create', [ScheduleController::class, 'create'])->name('schedule.create');
+    Route::get('/schedule/create/{travel_id}', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/schedule/{id}', [ScheduleController::class, 'edit'])->name('schedule.edit');
     Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
