@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SouvenirItemController;
 use App\Models\Travel;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TravelController;
@@ -37,13 +38,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/travel/{id}', [TravelController::class, 'edit'])->name('travel.edit');
     Route::put('/travel/{id}', [TravelController::class, 'update'])->name('travel.update');
     Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
+    Route::get('/memo/{travel_id}', [MemoController::class, 'index'])->name('memo.index');
     Route::get('/memo/create/{travel_id}', [MemoController::class, 'create'])->name('memo.create');
     Route::post('/memo/store', [MemoController::class, 'store'])->name('memo.store');
+
+    // お土産に関するルート
+    Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
+    Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
-    Route::get('/schedule/create', [ScheduleController::class, 'create'])->name('schedule.create');
+    Route::get('/schedule/create/{travel_id}', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/schedule/{id}', [ScheduleController::class, 'edit'])->name('schedule.edit');
     Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');

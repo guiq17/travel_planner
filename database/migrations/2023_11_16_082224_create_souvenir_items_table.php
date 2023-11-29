@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('souvenir_items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('souvenir_category_id');
+            $table->unsignedBigInteger('souvenir_category_list_id');
             $table->string('name');
             $table->integer('quantity');
             $table->integer('price')->nullable();
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->timestamps();
 
-            $table->foreign('souvenir_category_id')->references('id')->on('souvenir_categories');
+            $table->foreign('souvenir_category_list_id')->references('id')->on('souvenir_category_lists');
         });
     }
 

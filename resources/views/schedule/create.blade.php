@@ -7,17 +7,18 @@
     @include('components.complete_message')
     @include('components.validate_message')
     <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8">
-        <a type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.index') }}">一覧へ戻る</a>
+        <a type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.index', ['travel_id' => $travel_id]) }}">一覧へ戻る</a>
     </div>
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div class="container px-5 py-5 mx-auto">
             {{-- 新規スケジュール登録フォーム --}}
             <form action="{{ route('schedule.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
                 @csrf
+                <input type="hidden" value="{{ $travel_id }}" name="travel_id">
                 {{-- 日付 --}}
                 <div class="mb-6">
                     <label for="date" class="block text-lg font-medium text-gray-700 pd-4">日付</label>
-                    <input type="text" name="date" value="{{ old('date') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
+                    <input type="date" name="date" value="{{ old('date') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
                 </div>
                 {{-- 開始時間入力 --}}
                 <div class="mb-6">
