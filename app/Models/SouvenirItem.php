@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class SouvenirItem extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'souvenir_category_id',
+        'name',
+        'quantity',
+        'price',
+        'url',
+        'contents',
+        'image'
+    ];
 }

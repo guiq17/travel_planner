@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 // use Illuminate\Console\Scheduling\Schedule;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,8 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ScheduleSeeder::class);
         $this->call(PackingCategorySeeder::class);
         $this->call(PackingItemSeeder::class);
-        $this->call(SouvenirCategorySeeder::class);
-        $this->call(SouvenirItemSeeder::class);
         $this->call(MemoSeeder::class);
+        $this->call(SouvenirCategoryListSeeder::class);
+        $this->call(SouvenirItemSeeder::class);
+        $this->call(SouvenirCategoryItemSeeder::class);
     }
 }

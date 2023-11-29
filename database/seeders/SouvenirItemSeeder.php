@@ -14,25 +14,25 @@ class SouvenirItemSeeder extends Seeder
     public function run(): void
     {
         SouvenirItem::create([
-            'souvenir_category_id' => 1,
+            'souvenir_category_list_id' => 1,
             'name' => 'お土産1',
             'quantity' => 1,
             'price' => 1000,
         ]);
         SouvenirItem::create([
-            'souvenir_category_id' => 2,
+            'souvenir_category_list_id' => 2,
             'name' => 'お土産2',
             'quantity' => 2,
             'price' => 2000,
         ]);
         SouvenirItem::create([
-            'souvenir_category_id' => 3,
+            'souvenir_category_list_id' => 3,
             'name' => 'お土産3',
             'quantity' => 3,
             'price' => 3000,
         ]);
         SouvenirItem::create([
-            'souvenir_category_id' => 4,
+            'souvenir_category_list_id' => 4,
             'name' => 'お土産4',
             'quantity' => 4,
             'price' => 4000,
