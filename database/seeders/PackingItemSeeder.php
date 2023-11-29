@@ -31,19 +31,31 @@ class PackingItemSeeder extends Seeder
         ]);
         PackingItem::create([
             'packing_category_id' => 3,
-            'name' => '現金',
+            'name' => 'カメラ',
         ]);
         PackingItem::create([
             'packing_category_id' => 3,
-            'name' => 'クレジットカード',
+            'name' => 'スマホ',
         ]);
         PackingItem::create([
             'packing_category_id' => 4,
-            'name' => '航空券',
+            'name' => 'シャンプー',
         ]);
         PackingItem::create([
             'packing_category_id' => 4,
-            'name' => 'JRパス',
+            'name' => 'ボディソープ',
+        ]);
+        PackingItem::create([
+            'packing_category_id' => 5,
+            'name' => 'Tシャツ',
+        ]);
+        PackingItem::create([
+            'packing_category_id' => 5,
+            'name' => '靴下',
+        ]);
+        PackingItem::create([
+            'packing_category_id' => 6,
+            'name' => '本',
         ]);
     }
 }

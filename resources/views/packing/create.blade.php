@@ -9,23 +9,23 @@
     <div class="flex justify-center items-center min-h-screen" style="background-image: url('/images/main_bg6.jpeg'); background-size: cover;">
         <div class="container mx-auto p-8 bg-white rounded-lg shadow-md max-w-5xl">
             {{-- 持ち物登録フォーム --}}
-            <form action="{{ route('travel.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
+            <form action="{{ route('packing.create', ['travel_id' => $travel_id]) }}" method="POST" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
                 @csrf
                 <div class="grid grid-cols-2 gap-6">
-                    {{-- タイトル入力 --}}
+                    {{-- カテゴリー選択 --}}
                     <div class="col-span-2 mt-8">
-                        <label for="title" class="block text-lg font-medium text-gray-700 pd-4">タイトル</label>
-                        <input type="text" name="title" value="{{ old('title') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="タイトル入力">
+                        <label for="category_id" class="block text-lg font-medium text-gray-700 pd-4">カテゴリー</label>
+                        <select name="category_id" id="" class="w-full p-2 rounded-md border border-gray-300">
+                            <option value="">カテゴリーを選択してください</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    {{-- 開始日入力 --}}
-                    <div>
-                        <label for="start_date" class="block text-lg font-medium text-gray-700">出発日</label>
-                        <input type="date" name="start_date" value="{{ old('start_date') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="出発日入力">
-                    </div>
-                    {{-- 終了日入力 --}}
-                    <div>
-                        <label for="end_date" class="block text-lg font-medium text-gray-700">帰宅日</label>
-                        <input type="date" name="end_date" value="{{ old('end_date') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="帰宅日入力">
+                    {{-- 持ち物 --}}
+                    <div class="col-span-2">
+                        <label for="name" class="block text-lg font-medium text-gray-700">品名</label>
+                        <input type="text" name="name" value="{{ old('name') }}" autocomplete="off" class="w-full p-2 rounded-md border border-gray-300" placeholder="品名を入力してください">
                     </div>
                 </div>
                 {{-- 保存ボタン --}}
