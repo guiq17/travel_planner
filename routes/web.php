@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TravelController;
 use App\Http\Controllers\MemoController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PackingItemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,11 @@ Route::middleware('auth')->group(function () {
     // お土産に関するルート
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
+
+    // 持ち物に関するルート
+    Route::get('/packing/{travel_id}', [PackingItemController::class, 'index'])->name('packing.index');
+    Route::get('/packing/create/{travel_id}', [PackingItemController::class, 'create'])->name('packing.create');
+    Route::post('/packing/create/{travel_id}', [PackingItemController::class, 'store'])->name('packing.store');
 });
 
 Route::middleware('auth')->group(function () {
