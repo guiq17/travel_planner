@@ -13,25 +13,25 @@ class SouvenirCategoryItemSeeder extends Seeder
      */
     public function run(): void
     {
-        // SouvenirCategoryItem::create([
-        //     'travel_id' => 1,
-        //     'souvenir_category_list_id' => 1,
-        //     'souvenir_item_id' => 1,
-        // ]);
-        // SouvenirCategoryItem::create([
-        //     'travel_id' => 1,
-        //     'souvenir_category_list_id' => 2,
-        //     'souvenir_item_id' => 2,
-        // ]);
-        // SouvenirCategoryItem::create([
-        //     'travel_id' => 2,
-        //     'souvenir_category_list_id' => 1,
-        //     'souvenir_item_id' => 1,
-        // ]);
-        // SouvenirCategoryItem::create([
-        //     'travel_id' => 2,
-        //     'souvenir_category_list_id' => 2,
-        //     'souvenir_item_id' => 2,
-        // ]);
+        SouvenirCategoryItem::create([
+            'travel_id' => 1,
+            'souvenir_category_list_id' => 1,
+            'souvenir_item_id' => 1,
+        ]);
+        SouvenirCategoryItem::create([
+            'travel_id' => 1,
+            'souvenir_category_list_id' => 2,
+            'souvenir_item_id' => 2,
+        ]);
+        SouvenirCategoryItem::create([
+            'travel_id' => 2,
+            'souvenir_category_list_id' => 3,
+            'souvenir_item_id' => 3,
+        ]);
+        SouvenirCategoryItem::create([
+            'travel_id' => 2,
+            'souvenir_category_list_id' => 4,
+            'souvenir_item_id' => 4,
+        ]);
     }
 }
