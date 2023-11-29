@@ -97,8 +97,9 @@ class MemoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Memo $memo)
+    public function destroy($id,$travel_id)
     {
-        //
+        $this->memo_service->deleteMemo($id);
+        return redirect()->route('memo.index', $travel_id)->with('success', 'メモが正常に削除されました。');
     }
 }
