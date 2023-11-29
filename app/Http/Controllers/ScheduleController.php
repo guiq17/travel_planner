@@ -28,10 +28,10 @@ class ScheduleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($travel_id)
     {
         //新規スケジュール作成画面のビュー
-        return view('schedule.create');
+        return view('schedule.create',compact('travel_id'));
     }
 
     /**
@@ -40,19 +40,20 @@ class ScheduleController extends Controller
     public function store(StoreScheduleRequest $request , ScheduleService $schedule_service)
     {
         //post部分
-        $date = $request->input('date');
-        $start_time = $request->input('start_time');
-        $end_time = $request->input('end_time');
-        $event = $request->input('event');
-        $url = $request->input('url');
-        $image = $request->input('image');
-        $icon = $request->input('icon');
+        $travel_id = $request->travel_id;
+        $date = $request->date;
+        $start_time = $request->start_time;
+        $end_time = $request->end_time;
+        $event = $request->event;
+        $url = $request->url;
+        $image = $request->image;
+        $icon = $request->icon;
 
         DB::beginTransaction();
         try {
-            $schedule_service->storeSchedule($date, $start_time, $end_time,$event,$url,$image,$icon);
+            $schedule_service->storeSchedule($travel_id,$date, $start_time, $end_time,$event,$url,$image,$icon);
             DB::commit();
-            return redirect()->route('schedule.index')->with('success', '正常に登録されました。');
+            return redirect()->route('schedule.create', $travel_id)->with('success', '正常に登録されました。');
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error('Error: ' . $e->getMessage());
