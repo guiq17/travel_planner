@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/memo/destroy/{id}/{travel_id}', [MemoController::class, 'destroy'])->name('memo.destroy');
     
     // お土産に関するルート
+    Route::get('/souvenir/{travel_id}', [SouvenirItemController::class, 'index'])->name('souvenir.index');
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
     

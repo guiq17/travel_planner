@@ -10,6 +10,7 @@
         <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.create', $travel_id)}}">スケジュール追加</a>
         <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('packing.index', $travel_id)}}">持ち物リスト</a>
         <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.create', $travel_id) }}">メモ追加</a>
+        <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('souvenir.index', $travel_id) }}">お土産一覧</a>
     </div>
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div class="container px-5 py-5 mx-auto">
