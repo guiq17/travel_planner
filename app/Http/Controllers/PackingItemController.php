@@ -19,9 +19,10 @@ class PackingItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($travel_id)
     {
-        //
+        $list = $this->packing_item_service->getCategoriesItemsByTravelId($travel_id);
+        return view('packing.index', compact('travel_id', 'list'));
     }
 
     /**

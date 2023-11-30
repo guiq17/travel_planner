@@ -46,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/memo/store', [MemoController::class, 'store'])->name('memo.store');
     Route::get('memo/edit/{id}/{travel_id}', [MemoController::class, 'edit'])->name('memo.edit');
     Route::post('/memo/update/{id}/{travel_id}', [MemoController::class, 'update'])->name('memo.update');
+    Route::delete('/memo/destroy/{id}/{travel_id}', [MemoController::class, 'destroy'])->name('memo.destroy');
+    
     // お土産に関するルート
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
