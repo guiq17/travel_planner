@@ -40,13 +40,13 @@ class PackingItemController extends Controller
     public function store(StorePackingItemRequest $request, PackingItemService $packing_item_service)
     {
         $travel_id = $request->travel_id;
-        $category_id = $request->category_id;
-        $name = $request->name;
+        $packing_category_id = $request->packing_category_id;
+        $packing_item_name = $request->packing_item_name;
 
         DB::beginTransaction();
         try {
-            $packing_item_service->storePackingItem($category_id, $name);
-            $packing_item_service->storePackingCategoryItem($travel_id, $category_id, $name);
+            $packing_item_service->storePackingItem($packing_category_id, $packing_item_name);
+            $packing_item_service->storePackingCategoryItem($travel_id, $packing_category_id, $packing_item_name);
             DB::commit();
             return redirect()->route('packing.create', ['travel_id' => $travel_id])->with('success', '正常に登録されました。');
         } catch (\Exception $e) {
@@ -67,17 +67,35 @@ class PackingItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PackingItem $packingItem)
+    public function edit($packing_item_id, $travel_id)
     {
-        //
+        $categories = $this->packing_item_service->getPackingCategories();
+        $packing_category_id = $this->packing_item_service->getCategoryId($packing_item_id, $travel_id);
+        $packing_item_name = $this->packing_item_service->getItemName($packing_item_id);
+        return view('packing.edit', compact('travel_id', 'packing_item_id', 'categories', 'packing_category_id', 'packing_item_name'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePackingItemRequest $request, PackingItem $packingItem)
+    public function update(UpdatePackingItemRequest $request, PackingItemService $packing_item_service)
     {
-        //
+        $travel_id = $request->travel_id;
+        $packing_item_id = $request->packing_item_id;
+        $packing_category_id = $request->packing_category_id;
+        $packing_item_name = $request->packing_item_name;
+
+        DB::beginTransaction();
+        try {
+            $packing_item_service->updatePackingItem($packing_item_id, $packing_category_id, $packing_item_name);
+            $packing_item_service->updatePackingCategoryItem($travel_id, $packing_item_id, $packing_category_id);
+            DB::commit();
+            return redirect()->route('packing.index', ['travel_id' => $travel_id])->with('success', '正常に更新されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '更新できませんでした。');
+        }
     }
 
     /**
