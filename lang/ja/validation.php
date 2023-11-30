@@ -140,6 +140,9 @@ return [
         '属性名' => [
             'ルール名' => 'カスタムメッセージ',
         ],
+        'packing_item_name' => [
+            'unique_packing_item' => '指定された:attribute は既に存在します。',
+        ],
     ],
 
     /*
@@ -160,7 +163,9 @@ return [
         'price' => '価格',
         'url' => 'URL',
         'contents' => '内容',
-        'image' => '画像'
+        'image' => '画像',
+        'packing_category_id' => 'カテゴリーID',
+        'packing_item_name' => '品名',
     ],
 
 ];

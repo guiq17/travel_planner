@@ -53,10 +53,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
     
-    // 持ち物に関するルート
+    // 持ち物
     Route::get('/packing/{travel_id}', [PackingItemController::class, 'index'])->name('packing.index');
     Route::get('/packing/create/{travel_id}', [PackingItemController::class, 'create'])->name('packing.create');
     Route::post('/packing/create/{travel_id}', [PackingItemController::class, 'store'])->name('packing.store');
+    Route::get('/packing/edit/{packing_item_id}/{travel_id}', [PackingItemController::class, 'edit'])->name('packing.edit');
+    Route::put('/packing/edit/{packing_item_id}/{travel_id}', [PackingItemController::class, 'update'])->name('packing.update');
+    Route::delete('/packing/destroy/{packing_item_id}/{travel_id}', [PackingItemController::class, 'destroy'])->name('packing.destroy');
 
     //スケジュールに関するルート
     Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
@@ -66,8 +69,5 @@ Route::middleware('auth')->group(function () {
     Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
     Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
 });
-
-
-   
 
 require __DIR__.'/auth.php';
