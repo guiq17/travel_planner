@@ -19,15 +19,16 @@ class SouvenirItemService
 
     public function getSouvenirItems($travel_id)
     {
-        $souvenirItems = DB::table('souvenir_category_item as category_item')
+        $souvenirItemsList = DB::table('souvenir_category_item as category_item')
                         ->where('category_item.travel_id', $travel_id)
                         ->select('items.name as item_name', 'items.quantity', 'items.price', 'items.url', 'items.contents', 'items.image', 'categories.name as category_name')
                         ->join('souvenir_category_lists as categories', 'category_item.souvenir_category_list_id', 'categories.id')
                         ->join('souvenir_items as items', 'category_item.souvenir_item_id', 'items.id')
                         ->orderBy('items.id')
                         ->get();
+        $souvenirItemsList = $souvenirItemsList->groupBy('category_name');
 
-        return $souvenirItems;
+        return $souvenirItemsList;
     }
 
     public function createSouvenirItem($request)

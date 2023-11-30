@@ -23,9 +23,9 @@ class SouvenirItemController extends Controller
      */
     public function index($travel_id)
     {
-        $souvenir_items = $this->souvenirItemService->getSouvenirItems($travel_id);
+        $souvenir_list = $this->souvenirItemService->getSouvenirItems($travel_id);
 
-        return view('souvenir.index', compact('travel_id', 'souvenir_items'));
+        return view('souvenir.index', compact('travel_id', 'souvenir_list'));
     }
 
     /**
