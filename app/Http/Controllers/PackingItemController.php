@@ -40,8 +40,8 @@ class PackingItemController extends Controller
     public function store(StorePackingItemRequest $request, PackingItemService $packing_item_service)
     {
         $travel_id = $request->travel_id;
-        $category_id = $request->category_id;
-        $name = $request->name;
+        $category_id = $request->packing_category_id;
+        $name = $request->packing_item_name;
 
         DB::beginTransaction();
         try {

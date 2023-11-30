@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StorePackingItemRequest extends FormRequest
 {
@@ -23,14 +24,24 @@ class StorePackingItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => 'required',
-            'name' => [
+            'packing_category_id' => 'required',
+            'packing_item_name' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('packing_items', 'name')->where(function ($query) {
-                    return $query->where('travel_id', $this->travel_id);
-                }),
+                function ($attribute, $value, $fail) {
+                    $travel_id = $this->route('travel_id');
+
+                    $exists = DB::table('packing_items')
+                        ->join('packing_category_item', 'packing_category_item.packing_item_id', '=', 'packing_items.id')
+                        ->where('packing_category_item.travel_id', $travel_id)
+                        ->where('packing_items.name', $value)
+                        ->exists();
+
+                    if ($exists) {
+                        $fail('指定された:attributeは既に存在します。');
+                    }
+                },
             ],
         ];
     }
@@ -38,11 +49,10 @@ class StorePackingItemRequest extends FormRequest
     public function messages()
     {
         return [
-            'category_id.required' => 'カテゴリーを選択してください。',
-            'name.required' => '品名は必須です。',
-            'name.string' => '品名は文字列で入力してください。',
-            'name.max' => '品名は255文字以内で入力してください。',
-            'name.unique' => 'その品名は既に登録されています。',
+            'packing_category_id.required' => 'カテゴリーを選択してください。',
+            'packing_item_name.required' => '品名は必須です。',
+            'packing_item_name.string' => '品名は文字列で入力してください。',
+            'packing_item_name.max' => '品名は255文字以内で入力してください。',
         ];
     }
 }
