@@ -65,24 +65,41 @@ class MemoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Memo $memo)
+    public function edit($id,$travel_id)
     {
-        //
+        $memo = $this->memo_service->getMemo($id);
+        return view('memos.edit', compact('memo','id','travel_id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMemoRequest $request, Memo $memo)
+    public function update(UpdateMemoRequest $request, $id)
     {
-        //
+        $note = $request->note;
+        $url = $request->url;
+        $travel_id = $request->travel_id;
+
+        DB::beginTransaction();
+        try {
+            $memo = $this->memo_service->updateMemo($note,$url,$id);
+            DB::commit();
+            return redirect()->route('memo.edit', compact('memo','id','travel_id'))->with('success', 'メモが正常に更新されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error: ' . $e->getMessage());
+            Log::error('File: ' . $e->getFile());
+            Log::error('Line: ' . $e->getLine());
+            return redirect()->back()->with('error', 'メモの登録中にエラーが発生しました。');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Memo $memo)
+    public function destroy($id,$travel_id)
     {
-        //
+        $this->memo_service->deleteMemo($id);
+        return redirect()->route('memo.index', $travel_id)->with('success', 'メモが正常に削除されました。');
     }
 }

@@ -14,20 +14,22 @@ class PackingCategorySeeder extends Seeder
     public function run(): void
     {
         PackingCategory::create([
-            'travel_id' => 1,
             'name' => '貴重品',
         ]);
         PackingCategory::create([
-            'travel_id' => 1,
             'name' => '交通',
         ]);
         PackingCategory::create([
-            'travel_id' => 2,
-            'name' => '貴重品',
+            'name' => '記録媒体',
         ]);
         PackingCategory::create([
-            'travel_id' => 2,
-            'name' => '交通',
+            'name' => '洗面用具',
+        ]);
+        PackingCategory::create([
+            'name' => '衣類',
+        ]);
+        PackingCategory::create([
+            'name' => 'その他',
         ]);
     }
 }

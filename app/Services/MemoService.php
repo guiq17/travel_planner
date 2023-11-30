@@ -24,4 +24,25 @@ class MemoService
             'updated_at' => Carbon::now()
         ]);
     }
+
+    public function getMemo($id)
+    {
+        $memo = DB::table('memos')->where('id', $id)->first();
+        return $memo;
+    }
+
+    public function updateMemo($note,$url,$id)
+    {
+        DB::table('memos')->where('id', $id)->update([
+            'note' => $note,
+            'url' => $url
+        ]);
+        $memo = $this->getMemo($id);
+        return $memo;
+    }
+
+    public function deleteMemo($id)
+    {
+        DB::table('memos')->where('id',$id)->delete();
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TravelController;
 use App\Http\Controllers\MemoController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\PackingItemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,14 +39,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/travel/{id}', [TravelController::class, 'edit'])->name('travel.edit');
     Route::put('/travel/{id}', [TravelController::class, 'update'])->name('travel.update');
     Route::delete('/travel/{id}', [TravelController::class, 'destroy'])->name('travel.destroy');
+
+    // メモ
     Route::get('/memo/{travel_id}', [MemoController::class, 'index'])->name('memo.index');
     Route::get('/memo/create/{travel_id}', [MemoController::class, 'create'])->name('memo.create');
     Route::post('/memo/store', [MemoController::class, 'store'])->name('memo.store');
-
+    Route::get('memo/edit/{id}/{travel_id}', [MemoController::class, 'edit'])->name('memo.edit');
+    Route::post('/memo/update/{id}/{travel_id}', [MemoController::class, 'update'])->name('memo.update');
+    Route::delete('/memo/destroy/{id}/{travel_id}', [MemoController::class, 'destroy'])->name('memo.destroy');
+    
     // お土産に関するルート
     Route::get('/souvenir/{travel_id}', [SouvenirItemController::class, 'index'])->name('souvenir.index');
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
+    
+    // 持ち物に関するルート
+    Route::get('/packing/{travel_id}', [PackingItemController::class, 'index'])->name('packing.index');
+    Route::get('/packing/create/{travel_id}', [PackingItemController::class, 'create'])->name('packing.create');
+    Route::post('/packing/create/{travel_id}', [PackingItemController::class, 'store'])->name('packing.store');
 });
 
 Route::middleware('auth')->group(function () {
