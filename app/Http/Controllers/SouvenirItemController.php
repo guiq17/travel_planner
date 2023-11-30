@@ -21,9 +21,11 @@ class SouvenirItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($travel_id)
     {
-        //
+        $souvenir_items = $this->souvenirItemService->getSouvenirItems($travel_id);
+
+        return view('souvenir.index', compact('travel_id', 'souvenir_items'));
     }
 
     /**
