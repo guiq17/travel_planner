@@ -21,7 +21,7 @@ use App\Http\Controllers\PackingItemController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('home');
