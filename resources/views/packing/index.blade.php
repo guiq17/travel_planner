@@ -28,6 +28,12 @@
                                     <span>{{ $item->packing_item_name }}</span>
                                     <!-- 編集へのリンク -->
                                     <a href="{{ route('packing.edit', ['packing_item_id' => $item->packing_item_id, 'travel_id' => $travel_id]) }}" class="ml-2 text-blue-500 hover:underline">編集</a>
+                                    <!-- 削除リンク -->
+                                    <form action="{{ route('packing.destroy', ['packing_item_id' => $item->packing_item_id, 'travel_id' => $travel_id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="ml-2 text-red-500 hover:underline" onclick="return confirm('この品名を削除しますか？')">削除</button>
+                                    </form>
                                 </li>
                             @endforeach
                         </ul>

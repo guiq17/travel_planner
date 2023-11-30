@@ -98,4 +98,19 @@ class PackingItemService
                 'updated_at' => \Carbon\Carbon::now(),
             ]);
     }
+    
+    public function destroyPackingCategoryItem($packing_item_id, $travel_id)
+    {
+        DB::table('packing_category_item')
+            ->where('travel_id', $travel_id)
+            ->where('packing_item_id', $packing_item_id)
+            ->delete();
+    }
+
+    public function destroyPackingItem($packing_item_id)
+    {
+        DB::table('packing_items')
+        ->where('id', $packing_item_id)
+            ->delete();
+    }
 }
