@@ -101,8 +101,18 @@ class PackingItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PackingItem $packingItem)
+    public function destroy(PackingItemService $packing_item_service, $packing_item_id, $travel_id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $packing_item_service->destroyPackingCategoryItem($packing_item_id, $travel_id);
+            $packing_item_service->destroyPackingItem($packing_item_id);
+            DB::commit();
+            return redirect()->route('packing.index', ['travel_id' => $travel_id])->with('success', '正常に削除されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '削除できませんでした。');
+        }
     }
 }

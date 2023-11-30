@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/packing/create/{travel_id}', [PackingItemController::class, 'store'])->name('packing.store');
     Route::get('/packing/edit/{packing_item_id}/{travel_id}', [PackingItemController::class, 'edit'])->name('packing.edit');
     Route::put('/packing/edit/{packing_item_id}/{travel_id}', [PackingItemController::class, 'update'])->name('packing.update');
+    Route::delete('/packing/destroy/{packing_item_id}/{travel_id}', [PackingItemController::class, 'destroy'])->name('packing.destroy');
 
     //スケジュールに関するルート
     Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
