@@ -14,18 +14,18 @@
                 <div class="grid grid-cols-2 gap-6">
                     {{-- カテゴリー選択 --}}
                     <div class="col-span-2 mt-8">
-                        <label for="category_id" class="block text-lg font-medium text-gray-700 pd-4">カテゴリー</label>
-                        <select name="category_id" id="" class="w-full p-2 rounded-md border border-gray-300">
+                        <label for="packing_category_id" class="block text-lg font-medium text-gray-700 pd-4">カテゴリー</label>
+                        <select name="packing_category_id" id="" class="w-full p-2 rounded-md border border-gray-300">
                             <option value="">カテゴリーを選択してください</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" {{ old('packing_category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     {{-- 持ち物 --}}
                     <div class="col-span-2">
-                        <label for="name" class="block text-lg font-medium text-gray-700">品名</label>
-                        <input type="text" name="name" value="{{ old('name') }}" autocomplete="off" class="w-full p-2 rounded-md border border-gray-300" placeholder="品名を入力してください">
+                        <label for="packing_item_name" class="block text-lg font-medium text-gray-700">品名</label>
+                        <input type="text" name="packing_item_name" value="{{ old('packing_item_name') }}" autocomplete="off" class="w-full p-2 rounded-md border border-gray-300" placeholder="品名を入力してください">
                     </div>
                 </div>
                 {{-- 保存ボタン --}}

@@ -44,7 +44,7 @@ class MemoController extends Controller
         try {
             $this->memo_service->createMemo($travel_id, $note, $url);
             DB::commit();
-            return redirect()->route('memo.create', $travel_id)->with('success', 'メモが正常に登録されました。');
+            return redirect()->route('memo.index', $travel_id)->with('success', 'メモが正常に登録されました。');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error: ' . $e->getMessage());
@@ -84,7 +84,7 @@ class MemoController extends Controller
         try {
             $memo = $this->memo_service->updateMemo($note,$url,$id);
             DB::commit();
-            return redirect()->route('memo.edit', compact('memo','id','travel_id'))->with('success', 'メモが正常に更新されました。');
+            return redirect()->route('memo.index', $travel_id)->with('success', 'メモが正常に更新されました。');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Error: ' . $e->getMessage());

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Validator;
 
 class UpdatePackingItemRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdatePackingItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,22 @@ class UpdatePackingItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'packing_category_id' => 'required',
+            'packing_item_name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'packing_category_id.required' => 'カテゴリーを選択してください。',
+            'name.required' => '品名は必須です。',
+            'name.string' => '品名は文字列で入力してください。',
+            'name.max' => '品名は255文字以内で入力してください。',
         ];
     }
 }
