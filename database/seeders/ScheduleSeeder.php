@@ -16,32 +16,32 @@ class ScheduleSeeder extends Seeder
         Schedule::create([
             'travel_id' => 1,
             'date' => '2023-11-16',
-            'start_time' => '10:00:00',
-            'end_time' => '12:00:00',
+            'start_time' => '10:00',
+            'end_time' => '12:00',
             'event' => '観光',
             'url' => 'https://example.com',
         ]);
         Schedule::create([
             'travel_id' => 1,
             'date' => '2023-11-16',
-            'start_time' => '13:00:00',
-            'end_time' => '15:00:00',
+            'start_time' => '13:00',
+            'end_time' => '15:00',
             'event' => '昼食',
             'url' => 'https://example.com',
         ]);
         Schedule::create([
             'travel_id' => 2,
             'date' => '2023-11-19',
-            'start_time' => '10:00:00',
-            'end_time' => '12:00:00',
+            'start_time' => '10:00',
+            'end_time' => '12:00',
             'event' => '観光',
             'url' => 'https://example.com',
         ]);
         Schedule::create([
             'travel_id' => 2,
             'date' => '2023-11-19',
-            'start_time' => '13:00:00',
-            'end_time' => '15:00:00',
+            'start_time' => '13:00',
+            'end_time' => '15:00',
             'event' => '昼食',
             'url' => 'https://example.com',
         ]);
