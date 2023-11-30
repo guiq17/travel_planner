@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('event');
             $table->string('url')->nullable();
             $table->string('image')->nullable();
-            $table->string('icon')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
