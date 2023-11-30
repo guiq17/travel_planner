@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            お土産一覧
+            {{ __('souvenir list') }}
         </h2>
     </x-slot>
 
@@ -22,7 +22,7 @@
                     <div class="mt-4">
                         <div class="bg-white w-full rounded-2xl px-10 py-8 shadow-lg hover:shadow-2xl transition duration-500 flex">
                             <div class="flex-grow">
-                                <h1 class="text-lg text-gray-700 font-semibold hover:underline cursor-pointer">
+                                <h1 class="text-lg text-gray-700 font-semibold">
                                     {{ $item->item_name }}</h1>
                                 <hr class="w-full">
                                 <p class="mt-4 text-gray-600 py-1">

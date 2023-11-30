@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/souvenir/{travel_id}', [SouvenirItemController::class, 'index'])->name('souvenir.index');
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
+    Route::get('/souvenir/edit/{id}/{travel_id}', [SouvenirItemController::class, 'edit'])->name('souvenir.edit');
     
     // 持ち物に関するルート
     Route::get('/packing/{travel_id}', [PackingItemController::class, 'index'])->name('packing.index');

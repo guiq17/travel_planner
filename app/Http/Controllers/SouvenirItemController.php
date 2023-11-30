@@ -68,9 +68,13 @@ class SouvenirItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SouvenirItem $souvenirItem)
+    public function edit($id, $travel_id)
     {
-        //
+        $souvenir_categories = $this->souvenirItemService->getSouvenirCategories();
+        $souvenir_item = $this->souvenirItemService->getSouvenirItem($id);
+        // dd($souvenir_item);
+
+        return view('souvenir.edit', compact('souvenir_item','souvenir_categories', 'travel_id'));
     }
 
     /**
