@@ -12,7 +12,7 @@
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div class="container px-5 py-5 mx-auto">
             {{-- 新規スケジュール登録フォーム --}}
-            <form action="{{ route('schedule.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
+            <form action="{{ route('schedule.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md" enctype='multipart/form-data'>
                 @csrf
                 <input type="hidden" value="{{ $travel_id }}" name="travel_id">
                 {{-- 日付 --}}
@@ -39,11 +39,6 @@
                 <div class="mb-6">
                     <label for="url" class="block text-lg font-medium text-gray-700">参考HP</label>
                     <input type="text" name="url" value="{{ old('url') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="URL入力(例http://www.gogle.co.jp)">
-                </div>
-                {{-- 画像 --}}
-                <div class="mb-6">
-                  <label for="image" class="block text-lg font-medium text-gray-700">画像</label>
-                  <input type="file" name="image">
                 </div>
                 {{-- アイコン --}}
                 <div class="mb-6 checkbox-icon">

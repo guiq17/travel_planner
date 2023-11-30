@@ -20,7 +20,6 @@ class ScheduleSeeder extends Seeder
             'end_time' => '12:00:00',
             'event' => '観光',
             'url' => 'https://example.com',
-            'image' => 'https://example.com/image.jpg',
         ]);
         Schedule::create([
             'travel_id' => 1,
@@ -29,7 +28,6 @@ class ScheduleSeeder extends Seeder
             'end_time' => '15:00:00',
             'event' => '昼食',
             'url' => 'https://example.com',
-            'image' => 'https://example.com/image.jpg',
         ]);
         Schedule::create([
             'travel_id' => 2,
@@ -38,7 +36,6 @@ class ScheduleSeeder extends Seeder
             'end_time' => '12:00:00',
             'event' => '観光',
             'url' => 'https://example.com',
-            'image' => 'https://example.com/image.jpg',
         ]);
         Schedule::create([
             'travel_id' => 2,
@@ -47,7 +44,6 @@ class ScheduleSeeder extends Seeder
             'end_time' => '15:00:00',
             'event' => '昼食',
             'url' => 'https://example.com',
-            'image' => 'https://example.com/image.jpg',
         ]);
     }
 }

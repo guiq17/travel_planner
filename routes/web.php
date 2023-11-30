@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/memo/destroy/{id}/{travel_id}', [MemoController::class, 'destroy'])->name('memo.destroy');
     
     // お土産に関するルート
+    Route::get('/souvenir/{travel_id}', [SouvenirItemController::class, 'index'])->name('souvenir.index');
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
     
@@ -58,9 +59,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/packing/create/{travel_id}', [PackingItemController::class, 'store'])->name('packing.store');
     Route::get('/packing/edit/{packing_item_id}/{travel_id}', [PackingItemController::class, 'edit'])->name('packing.edit');
     Route::put('/packing/edit/{packing_item_id}/{travel_id}', [PackingItemController::class, 'update'])->name('packing.update');
-});
 
-Route::middleware('auth')->group(function () {
+    //スケジュールに関するルート
     Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
     Route::get('/schedule/create/{travel_id}', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');

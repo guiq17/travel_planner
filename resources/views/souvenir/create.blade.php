@@ -76,6 +76,7 @@
                             <button
                                 class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-700 rounded text-lg">保存</button>
                         </div>
+                        <a href="{{ route('souvenir.index', ['travel_id' => $travel_id])}}" class="hover:underline">← お土産一覧へ</a>
                     </div>
                 </div>
             </div>
