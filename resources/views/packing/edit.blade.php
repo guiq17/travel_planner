@@ -9,7 +9,7 @@
     <div class="flex justify-center items-center min-h-screen" style="background-image: url('/images/main_bg6.jpeg'); background-size: cover;">
         <div class="container mx-auto p-8 bg-white rounded-lg shadow-md max-w-5xl">
             {{-- 持ち物登録フォーム --}}
-            <form action="" method="POST" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
+            <form action="{{ route('packing.update', ['packing_item_id' => $packing_item_id, 'travel_id' => $travel_id]) }}" method="POST" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
                 @csrf
                 @method('PUT')
                 <div class="grid grid-cols-2 gap-6">

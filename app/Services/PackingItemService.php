@@ -44,9 +44,11 @@ class PackingItemService
 
     public function storePackingCategoryItem($travel_id, $packing_category_id, $packing_item_name)
     {
-        $packing_item_id = DB::table('packing_items')
-                    ->where('name', $packing_item_name)
-                    ->value('id');
+        // 新規作成した持ち物のレコードを取得
+        $new_item = DB::table(('packing_items'))
+                                ->latest('id')
+                                ->first();
+        $packing_item_id = $new_item->id;
 
         DB::table('packing_category_item')
             ->insert([
@@ -73,5 +75,27 @@ class PackingItemService
                         ->where('id', $packing_item_id)
                         ->value('name');
         return $packing_item_name;
+    }
+
+    public function updatePackingItem($packing_item_id, $packing_category_id, $packing_item_name)
+    {
+        DB::table('packing_items')
+            ->where('id', $packing_item_id)
+            ->update([
+                'packing_category_id' => $packing_category_id,
+                'name' => $packing_item_name,
+                'updated_at' => \Carbon\Carbon::now(),
+            ]);
+    }
+
+    public function updatePackingCategoryItem($travel_id, $packing_item_id, $packing_category_id)
+    {
+        DB::table('packing_category_item')
+            ->where('travel_id', $travel_id)
+            ->where('packing_item_id', $packing_item_id)
+            ->update([
+                'packing_category_id' => $packing_category_id,
+                'updated_at' => \Carbon\Carbon::now(),
+            ]);
     }
 }
