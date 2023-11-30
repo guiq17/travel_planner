@@ -67,9 +67,13 @@ class PackingItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PackingItem $packingItem)
+    public function edit($travel_id, $item_id)
     {
-        //
+        $categories = $this->packing_item_service->getPackingCategories();
+        $category_id = $this->packing_item_service->getCategoryId($travel_id, $item_id);
+        dd($category_id);
+        $item_name = $this->packing_item_service->getItemName($item_id);
+        return view('packing.edit', compact('travel_id', 'item_id', 'categories', 'category_id', 'item_name'));
     }
 
     /**

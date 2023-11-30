@@ -9,7 +9,8 @@
     <div class="flex justify-center items-center min-h-screen" style="background-image: url('/images/main_bg6.jpeg'); background-size: cover;">
         <div class="container mx-auto p-8 bg-white rounded-lg shadow-md max-w-5xl">
             <div class="max-w-7xl mx-auto pb-4">
-                <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('packing.create', ['travel_id' => $travel_id]) }}">追加</a>
+                <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded" href="{{ route('packing.create', ['travel_id' => $travel_id]) }}">追加</a>
+                {{-- <a type="button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" href="{{ route('packing.create', ['travel_id' => $travel_id]) }}">編集</a> --}}
             </div>
             <div class="space-y-4">
                 <!-- カテゴリーごとのリスト -->
@@ -25,6 +26,8 @@
                                     <input type="checkbox" class="mr-2">
                                     <!-- アイテム名 -->
                                     <span>{{ $item->item_name }}</span>
+                                    <!-- 編集へのリンク -->
+                                    <a href="{{ route('packing.edit', ['travel_id' => $travel_id, 'item_id' => $item->item_id]) }}" class="ml-2 text-blue-500 hover:underline">編集</a>
                                 </li>
                             @endforeach
                         </ul>

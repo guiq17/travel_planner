@@ -52,10 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
     
-    // 持ち物に関するルート
+    // 持ち物
     Route::get('/packing/{travel_id}', [PackingItemController::class, 'index'])->name('packing.index');
     Route::get('/packing/create/{travel_id}', [PackingItemController::class, 'create'])->name('packing.create');
     Route::post('/packing/create/{travel_id}', [PackingItemController::class, 'store'])->name('packing.store');
+    Route::get('/packing/edit/{item_id}/{travel_id}', [PackingItemController::class, 'edit'])->name('packing.edit');
+    Route::put('/packing/edit/{item_id}/{travel_id}', [PackingItemController::class, 'update'])->name('packing.update');
 });
 
 Route::middleware('auth')->group(function () {
