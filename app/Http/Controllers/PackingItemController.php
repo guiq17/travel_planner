@@ -40,13 +40,13 @@ class PackingItemController extends Controller
     public function store(StorePackingItemRequest $request, PackingItemService $packing_item_service)
     {
         $travel_id = $request->travel_id;
-        $category_id = $request->packing_category_id;
-        $name = $request->packing_item_name;
+        $packing_category_id = $request->packing_category_id;
+        $packing_item_name = $request->packing_item_name;
 
         DB::beginTransaction();
         try {
-            $packing_item_service->storePackingItem($category_id, $name);
-            $packing_item_service->storePackingCategoryItem($travel_id, $category_id, $name);
+            $packing_item_service->storePackingItem($packing_category_id, $packing_item_name);
+            $packing_item_service->storePackingCategoryItem($travel_id, $packing_category_id, $packing_item_name);
             DB::commit();
             return redirect()->route('packing.create', ['travel_id' => $travel_id])->with('success', '正常に登録されました。');
         } catch (\Exception $e) {
@@ -67,13 +67,12 @@ class PackingItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($travel_id, $item_id)
+    public function edit($packing_item_id, $travel_id)
     {
         $categories = $this->packing_item_service->getPackingCategories();
-        $category_id = $this->packing_item_service->getCategoryId($travel_id, $item_id);
-        dd($category_id);
-        $item_name = $this->packing_item_service->getItemName($item_id);
-        return view('packing.edit', compact('travel_id', 'item_id', 'categories', 'category_id', 'item_name'));
+        $packing_category_id = $this->packing_item_service->getCategoryId($packing_item_id, $travel_id);
+        $packing_item_name = $this->packing_item_service->getItemName($packing_item_id);
+        return view('packing.edit', compact('travel_id', 'packing_item_id', 'categories', 'packing_category_id', 'packing_item_name'));
     }
 
     /**

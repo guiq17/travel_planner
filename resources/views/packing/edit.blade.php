@@ -15,23 +15,23 @@
                 <div class="grid grid-cols-2 gap-6">
                     {{-- カテゴリー選択 --}}
                     <div class="col-span-2 mt-8">
-                        <label for="category_id" class="block text-lg font-medium text-gray-700 pd-4">カテゴリー</label>
-                        <select name="category_id" id="" class="w-full p-2 rounded-md border border-gray-300">
+                        <label for="packing_category_id" class="block text-lg font-medium text-gray-700 pd-4">カテゴリー</label>
+                        <select name="packing_category_id" id="" class="w-full p-2 rounded-md border border-gray-300">
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @if($category->id == $category_id) selected @endif>{{ $category->name }}</option>
+                                <option value="{{ $category->id }}" @if($category->id == $packing_category_id) selected @endif>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     {{-- 持ち物 --}}
                     <div class="col-span-2">
-                        <label for="name" class="block text-lg font-medium text-gray-700">品名</label>
-                        <input type="text" name="name" value="{{ $item_name }}" autocomplete="off" class="w-full p-2 rounded-md border border-gray-300" placeholder="品名を入力してください">
+                        <label for="packing_item_name" class="block text-lg font-medium text-gray-700">品名</label>
+                        <input type="text" name="packing_item_name" value="{{ $packing_item_name }}" autocomplete="off" class="w-full p-2 rounded-md border border-gray-300" placeholder="品名を入力してください">
                     </div>
                 </div>
                 {{-- 保存ボタン --}}
                 <div class="mt-20">
                     <a class="inline-block px-4 py-2 mr-2 bg-white text-red-500 border-2 border-red-500 rounded-md hover:bg-red-500 hover:text-white" href="{{ route('packing.index', ['travel_id' => $travel_id]) }}">キャンセル</a>
-                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">更新</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">保存</button>
                 </div>
             </form>
         </div>

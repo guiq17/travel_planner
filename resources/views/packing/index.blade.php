@@ -14,10 +14,10 @@
             </div>
             <div class="space-y-4">
                 <!-- カテゴリーごとのリスト -->
-                @foreach($list as $category_name => $items)
+                @foreach($list as $packing_category_name => $items)
                     <div class="mb-4">
                         <!-- カテゴリー名 -->
-                        <h2 class="text-lg font-semibold">{{ $category_name }}</h2>
+                        <h2 class="text-lg font-semibold">{{ $packing_category_name }}</h2>
                         <!-- アイテムリスト -->
                         <ul class="list-disc pl-4 space-y-2">
                             @foreach($items as $item)
@@ -25,9 +25,9 @@
                                     <!-- チェックボックス -->
                                     <input type="checkbox" class="mr-2">
                                     <!-- アイテム名 -->
-                                    <span>{{ $item->item_name }}</span>
+                                    <span>{{ $item->packing_item_name }}</span>
                                     <!-- 編集へのリンク -->
-                                    <a href="{{ route('packing.edit', ['travel_id' => $travel_id, 'item_id' => $item->item_id]) }}" class="ml-2 text-blue-500 hover:underline">編集</a>
+                                    <a href="{{ route('packing.edit', ['packing_item_id' => $item->packing_item_id, 'travel_id' => $travel_id]) }}" class="ml-2 text-blue-500 hover:underline">編集</a>
                                 </li>
                             @endforeach
                         </ul>
