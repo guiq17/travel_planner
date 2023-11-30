@@ -14,7 +14,7 @@ class ScheduleService
       return $schedule;
   }
 
-  public function storeSchedule($travel_id,$date, $start_time, $end_time,$event,$url,$image,$icon)
+  public function storeSchedule($travel_id,$date, $start_time, $end_time,$event,$url,$icon)
     {
       DB::table('schedules')->insert([
         'travel_id' => $travel_id,
@@ -23,7 +23,6 @@ class ScheduleService
         'end_time' => $end_time,
         'event' => $event,
         'url' => $url,
-        'image' => $image,
         'icon' => $icon,
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now()
