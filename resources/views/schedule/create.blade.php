@@ -23,22 +23,22 @@
                 {{-- 開始時間入力 --}}
                 <div class="mb-6">
                     <label for="start_time" class="block text-lg font-medium text-gray-700">開始時間</label>
-                    <input type="time" name="start_time" value="{{ old('start_date') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="出発日入力">
+                    <input type="time" name="start_time" value="{{ old('start_date') }}"  class="w-full p-2 rounded-md border border-gray-300" placeholder="開始時間入力">
                 </div>
                 {{-- 終了時間入力 --}}
                 <div class="mb-6">
                     <label for="end_time" class="block text-lg font-medium text-gray-700">終了時間</label>
-                    <input type="time" name="end_time" value="{{ old('end_date') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="帰宅日入力">
+                    <input type="time" name="end_time" value="{{ old('end_date') }}"  class="w-full p-2 rounded-md border border-gray-300" placeholder="終了時間入力">
                 </div>
                 {{-- 内容 --}}
                 <div class="mb-6">
                     <label for="event" class="block text-lg font-medium text-gray-700">内容</label>
-                    <input type="text" name="event" value="{{ old('event') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="内容を記載してください(例：持ち物、特記事項など">
+                    <input type="text" name="event" value="{{ old('event') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="内容を記載してください(例：東京タワーに行こう！">
                 </div>
                 {{-- 参考HP --}}
                 <div class="mb-6">
                     <label for="url" class="block text-lg font-medium text-gray-700">参考HP</label>
-                    <input type="text" name="url" value="{{ old('url') }}" min="{{ now()->toDateString() }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="URL入力(例http://www.gogle.co.jp)">
+                    <input type="text" name="url" value="{{ old('url') }}"  class="w-full p-2 rounded-md border border-gray-300" placeholder="URL入力(例http://www.gogle.co.jp)">
                 </div>
                 {{-- アイコン --}}
                 <div class="mb-6 checkbox-icon">

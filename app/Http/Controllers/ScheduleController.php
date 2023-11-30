@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateScheduleRequest;
 use App\Models\Schedule;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ScheduleController extends Controller
 {
@@ -71,17 +72,37 @@ class ScheduleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Schedule $schedule)
+    public function edit($id,$travel_id)
     {
-        //編集のビュー
+        $schedule = $this->schedule_service->getSchedule($id);
+        return view('schedule.edit', compact('schedule','id','travel_id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateScheduleRequest $request, Schedule $schedule)
+    public function update(UpdateScheduleRequest $request, $id)
     {
-        //編集のポスト
+        $travel_id = $request->travel_id;
+        $date = $request->date;
+        $start_time = $request->start_time;
+        $end_time = $request->end_time;
+        $event = $request->event;
+        $url = $request->url;
+        $icon = $request->icon;
+
+        DB::beginTransaction();
+        try {
+            $schedule = $this->schedule_service->updateSchedule($id,$travel_id,$date, $start_time, $end_time,$event,$url,$icon);
+            DB::commit();
+            return redirect()->route('schedule.index', compact('schedule','id','travel_id'))->with('success', 'スケジュールが正常に更新されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error: ' . $e->getMessage());
+            Log::error('File: ' . $e->getFile());
+            Log::error('Line: ' . $e->getLine());
+            return redirect()->back()->with('error', 'スケジュールの登録中にエラーが発生しました。');
+        }
     }
 
     /**
