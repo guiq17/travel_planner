@@ -73,4 +73,31 @@ class SouvenirItemService
 
         return $souvenir_category_item;
     }
+
+    public function updateSouvenirItem($request, $id)
+    {
+
+        $souvenir = SouvenirItem::find($id);
+
+        $souvenir->souvenir_category_list_id = $request->category_id;
+        $souvenir->name = $request->souvenir_name;
+        $souvenir->quantity = $request->quantity;
+        $souvenir->price = $request->price;
+        $souvenir->url = $request->url;
+        $souvenir->contents = $request->contents;
+        if (request('image')){
+            $name = request()->file('image')->getClientOriginalName();
+            request()->file('image')->move('storage/images', $name);
+            $souvenir->image = $name;
+        }   
+        $souvenir->save();
+    }
+
+    public function updateSouvenirCategoryItem($request, $id, $souvenir)
+    {
+        $souvenir_category_item = SouvenirCategoryItem::where('souvenir_item_id', $id)->first();
+        
+        $souvenir_category_item->souvenir_category_list_id = $request->category_id;
+        $souvenir_category_item->save();
+    }
 }

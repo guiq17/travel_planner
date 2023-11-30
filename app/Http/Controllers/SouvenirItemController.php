@@ -72,17 +72,28 @@ class SouvenirItemController extends Controller
     {
         $souvenir_categories = $this->souvenirItemService->getSouvenirCategories();
         $souvenir_item = $this->souvenirItemService->getSouvenirItem($id);
-        // dd($souvenir_item);
 
-        return view('souvenir.edit', compact('souvenir_item','souvenir_categories', 'travel_id'));
+        return view('souvenir.edit', compact('souvenir_item','souvenir_categories', 'travel_id', 'id'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSouvenirItemRequest $request, SouvenirItem $souvenirItem)
+    public function update(UpdateSouvenirItemRequest $request, $id)
     {
-        //
+        $travel_id = $request->travel_id;
+        DB::beginTransaction();
+        try {
+            $this->souvenirItemService->updateSouvenirItem($request, $id);
+            $souvenir = $this->souvenirItemService->getSouvenirItem($id);
+            $this->souvenirItemService->updateSouvenirCategoryItem($request, $id, $souvenir);
+            DB::commit();
+            return redirect()->route('souvenir.index', $travel_id)->with('success', 'お土産が正常に更新されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'お土産の登録中にエラーが発生しました。');
+        }
     }
 
     /**

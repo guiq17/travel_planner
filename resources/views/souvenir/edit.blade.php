@@ -8,8 +8,9 @@
     @include('components.complete_message')
     @include('components.validate_message')
 
-    <form method="POST" action="{{ route('souvenir.store', ['travel_id' => $travel_id]) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('souvenir.update', ['id' => $id, 'travel_id' => $travel_id]) }}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <section class="text-gray-600 body-font relative">
             <div class="container px-5 py-24 mx-auto">
                 <div class="lg:w-1/2 md:w-2/3 mx-auto">

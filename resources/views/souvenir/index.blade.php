@@ -5,6 +5,9 @@
         </h2>
     </x-slot>
 
+    @include('components.complete_message')
+    @include('components.validate_message')
+
     <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8 mb-4">
         <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             href="{{ route('souvenir.create', $travel_id) }}">お土産追加</a>
@@ -48,7 +51,7 @@
                                 </div>
 
                                 <a type="button"
-                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-2 rounded"
+                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-2 rounded"
                                     href="{{ route('souvenir.edit', ['id' => $item->item_id, 'travel_id' => $travel_id]) }}">編集</a>
                             </div>
                         </div>
