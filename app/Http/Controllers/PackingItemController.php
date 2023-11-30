@@ -80,10 +80,22 @@ class PackingItemController extends Controller
      */
     public function update(UpdatePackingItemRequest $request, PackingItemService $packing_item_service)
     {
-        // dd($request->all());
         $travel_id = $request->travel_id;
         $packing_item_id = $request->packing_item_id;
         $packing_category_id = $request->packing_category_id;
+        $packing_item_name = $request->packing_item_name;
+
+        DB::beginTransaction();
+        try {
+            $packing_item_service->updatePackingItem($packing_item_id, $packing_category_id, $packing_item_name);
+            $packing_item_service->updatePackingCategoryItem($travel_id, $packing_item_id, $packing_category_id);
+            DB::commit();
+            return redirect()->route('packing.index', ['travel_id' => $travel_id])->with('success', '正常に更新されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '更新できませんでした。');
+        }
     }
 
     /**
