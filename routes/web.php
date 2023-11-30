@@ -56,9 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/packing/{travel_id}', [PackingItemController::class, 'index'])->name('packing.index');
     Route::get('/packing/create/{travel_id}', [PackingItemController::class, 'create'])->name('packing.create');
     Route::post('/packing/create/{travel_id}', [PackingItemController::class, 'store'])->name('packing.store');
-});
 
-Route::middleware('auth')->group(function () {
+    //スケジュールに関するルート
     Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
     Route::get('/schedule/create/{travel_id}', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
@@ -66,5 +65,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
     Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
 });
+
+
+   
 
 require __DIR__.'/auth.php';
