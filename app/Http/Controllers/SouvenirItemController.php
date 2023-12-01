@@ -85,8 +85,7 @@ class SouvenirItemController extends Controller
         DB::beginTransaction();
         try {
             $this->souvenirItemService->updateSouvenirItem($request, $id);
-            $souvenir = $this->souvenirItemService->getSouvenirItem($id);
-            $this->souvenirItemService->updateSouvenirCategoryItem($request, $id, $souvenir);
+            $this->souvenirItemService->updateSouvenirCategoryItem($request, $id);
             DB::commit();
             return redirect()->route('souvenir.index', $travel_id)->with('success', 'お土産が正常に更新されました。');
         } catch (\Exception $e) {

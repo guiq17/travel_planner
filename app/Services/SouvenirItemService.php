@@ -93,7 +93,7 @@ class SouvenirItemService
         $souvenir->save();
     }
 
-    public function updateSouvenirCategoryItem($request, $id, $souvenir)
+    public function updateSouvenirCategoryItem($request, $id)
     {
         $souvenir_category_item = SouvenirCategoryItem::where('souvenir_item_id', $id)->first();
         
