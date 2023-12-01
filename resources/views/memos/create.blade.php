@@ -4,14 +4,16 @@
             メモ作成
         </h2>
     </x-slot>
-    @include('components.complete_message')
-    @include('components.validate_message')
-    <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8">
-        <a type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.index', $travel_id) }}">一覧へ戻る</a>
-    </div>
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div class="container px-5 py-5 mx-auto">
-            <form action="{{ route('memo.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md">
+    <div class="flex justify-center items-center min-h-screen" style="background-image: url('/images/main_bg6.jpeg'); background-size: cover;">
+        <div class="container mx-auto p-8 bg-white rounded-lg shadow-md max-w-5xl">
+            <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8">
+                <a type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.index', $travel_id) }}">一覧へ戻る</a>
+            </div>
+            <div class="m-5">
+                @include('components.complete_message')
+                @include('components.validate_message')
+            </div>
+            <form action="{{ route('memo.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
                 @csrf
                 <input type="hidden" value="{{ $travel_id }}" name="travel_id">
                 <div class="mb-6">

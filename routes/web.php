@@ -21,7 +21,7 @@ use App\Http\Controllers\PackingItemController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('home');
@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/souvenir/{travel_id}', [SouvenirItemController::class, 'index'])->name('souvenir.index');
     Route::get('/souvenir/create/{travel_id}', [SouvenirItemController::class, 'create'])->name('souvenir.create');
     Route::post('/souvenir', [SouvenirItemController::class, 'store'])->name('souvenir.store');
+    Route::get('/souvenir/edit/{id}/{travel_id}', [SouvenirItemController::class, 'edit'])->name('souvenir.edit');
+    Route::put('/souvenir/{id}/{travel_id}', [SouvenirItemController::class, 'update'])->name('souvenir.update');
     
     // 持ち物
     Route::get('/packing/{travel_id}', [PackingItemController::class, 'index'])->name('packing.index');
@@ -65,8 +67,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/schedule/{travel_id}', [ScheduleController::class, 'index'])->name('schedule.index');
     Route::get('/schedule/create/{travel_id}', [ScheduleController::class, 'create'])->name('schedule.create');
     Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
-    Route::get('/schedule/{id}', [ScheduleController::class, 'edit'])->name('schedule.edit');
-    Route::put('/schedule/{id}', [ScheduleController::class, 'update'])->name('schedule.update');
+    Route::get('/schedule/edit/{id}/{travel_id}', [ScheduleController::class, 'edit'])->name('schedule.edit');
+    Route::post('/schedule/update/{id}/{travel_id}', [ScheduleController::class, 'update'])->name('schedule.update');
     Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
 });
 
