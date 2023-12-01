@@ -100,4 +100,14 @@ class SouvenirItemService
         $souvenir_category_item->souvenir_category_list_id = $request->category_id;
         $souvenir_category_item->save();
     }
+
+    public function deleteSouvenirItem($id)
+    {
+        DB::table('souvenir_items')->where('id', $id)->delete();
+    }
+
+    public function deleteSouvenirCategoryItem($id)
+    {
+        DB::table('souvenir_category_item')->where('souvenir_item_id', $id)->delete();
+    }
 }
