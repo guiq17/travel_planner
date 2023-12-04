@@ -53,9 +53,16 @@
                                     @endif
                                 </div>
 
+                                <div class="flex">
                                 <a type="button"
                                     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-2 rounded"
                                     href="{{ route('souvenir.edit', ['id' => $item->item_id, 'travel_id' => $travel_id]) }}">編集</a>
+                                    <form action="{{ route('souvenir.destroy', ['id' => $item->item_id, 'travel_id' => $travel_id]) }}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <td class="w-1/10 px-4 py-3 text-center"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mt-2 ml-4 rounded" type="submit" onclick='return confirm("このお土産を削除しますか？")'>削除</button></td>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
