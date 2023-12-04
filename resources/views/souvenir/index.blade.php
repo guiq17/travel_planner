@@ -8,9 +8,12 @@
     @include('components.complete_message')
     @include('components.validate_message')
 
-    <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8 mb-4">
+    <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8 mb-4 flex justify-between items-center">
         <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             href="{{ route('souvenir.create', $travel_id) }}">お土産追加</a>
+        <div class="text-right">
+            合計金額：円
+        </div>
     </div>
 
     {{-- お土産一覧表示用のコード --}}
