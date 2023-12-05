@@ -11,7 +11,7 @@ class UpdateSouvenirItemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class UpdateSouvenirItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'category_id' => 'required|numeric',
+            'souvenir_name' => 'required|string',
+            'quantity' => 'required|numeric',
+            'price' => 'nullable|numeric',
+            'url' => 'nullable|url',
+            'contents' => 'nullable|max:255',
+            'image' => 'image|max:1024',
         ];
     }
 }
