@@ -36,8 +36,12 @@
                             <td class="px-4 py-3">{{ $schedule->event }}</td>
                             <td class="px-4 py-3"><a href="{{ $schedule->url }}" target="_blank">{{ $schedule->url }}</a></td>
                             <td class="px-4 py-3 fas fa-{{$schedule->icon}} fa-2x"></td>
-                            <td><a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.edit', ['id' => $schedule->id, 'travel_id' => $travel_id]) }}">編集</a></td>
-                            <td><a type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.edit', ['id' => $schedule->id, 'travel_id' => $travel_id]) }}">削除</a></td>
+                            <td class="w-1/10 px-4 py-3 text-center"><a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.edit', ['id' => $schedule->id, 'travel_id' => $travel_id]) }}">編集</a></td>
+                            <form action="{{ route('schedule.destroy', ['id' => $schedule->id, 'travel_id' => $travel_id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <td class="w-1/10 px-4 py-3 text-center"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit" onclick='return confirm("このスケジュールを削除しますか？")'>削除</button></td>
+                            </form>
                         </tr>
                         @endforeach
                 </table>

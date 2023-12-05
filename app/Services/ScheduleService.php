@@ -10,7 +10,7 @@ class ScheduleService
 {
   public function scheduleList($travel_id)
   {
-      $schedule = DB::table('schedules')->where('travel_id', $travel_id)->orderBy('id', 'asc')->get();
+      $schedule = DB::table('schedules')->where('travel_id', $travel_id)->whereNull('deleted_at')->orderBy('id', 'asc')->get();
       return $schedule;
   }
 
@@ -48,7 +48,5 @@ class ScheduleService
         ]);
         $schedule = $this->getSchedule($id);
         return $schedule;
-    }
-
-    
+    }    
 }
