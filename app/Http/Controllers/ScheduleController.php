@@ -108,8 +108,16 @@ class ScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Schedule $schedule)
+    public function destroy($id,$travel_id)
     {
-        //削除
+        
+        DB::beginTransaction();
+        try {
+            $schedule = $this->schedule_service->deleteSchedule($id);
+            DB::commit();
+            return redirect()->route('schedule.index', $travel_id)->with('success', 'スケジュールが正常に削除されました。');
+        }catch (\Exception $e) {
+            return redirect()->back()->with('error', '正常に削除できませんでした。');
+        }
     }
 }

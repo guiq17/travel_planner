@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/schedule', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/schedule/edit/{id}/{travel_id}', [ScheduleController::class, 'edit'])->name('schedule.edit');
     Route::post('/schedule/update/{id}/{travel_id}', [ScheduleController::class, 'update'])->name('schedule.update');
-    Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
+    Route::delete('/schedule/destroy/{id}/{travel_id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy'); 
 });
 
 require __DIR__.'/auth.php';
