@@ -49,4 +49,11 @@ class ScheduleService
         $schedule = $this->getSchedule($id);
         return $schedule;
     }    
+
+    public function deleteSchedule($id)
+    {
+        $schedule = Schedule::find($id);
+        $schedule->delete();
+        return $schedule;
+    }
 }

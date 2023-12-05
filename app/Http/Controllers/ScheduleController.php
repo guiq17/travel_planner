@@ -110,8 +110,14 @@ class ScheduleController extends Controller
      */
     public function destroy($id,$travel_id)
     {
-        $schedule = Schedule::find($id);
-        $schedule->delete();
-        return redirect()->route('schedule.index', $travel_id)->with('success', 'スケジュールが正常に削除されました。');
+        
+        DB::beginTransaction();
+        try {
+            $schedule = $this->schedule_service->deleteSchedule($id);
+            DB::commit();
+            return redirect()->route('schedule.index', $travel_id)->with('success', 'スケジュールが正常に削除されました。');
+        }catch (\Exception $e) {
+            return redirect()->back()->with('error', '正常に削除できませんでした。');
+        }
     }
 }
