@@ -21,7 +21,7 @@ class SouvenirItemService
     {
         $souvenir_items_list = DB::table('souvenir_category_item as category_item')
                         ->where('category_item.travel_id', $travel_id)
-                        ->select('items.id as item_id', 'items.name as item_name', 'items.quantity', 'items.price', 'items.url', 'items.contents', 'items.image', 'categories.name as category_name')
+                        ->select('items.id as item_id', 'items.name as item_name', 'items.quantity as quantity', 'items.price as price', 'items.url', 'items.contents', 'items.image', 'categories.name as category_name')
                         ->join('souvenir_category_lists as categories', 'category_item.souvenir_category_list_id', 'categories.id')
                         ->join('souvenir_items as items', 'category_item.souvenir_item_id', 'items.id')
                         ->orderBy('items.id')
@@ -100,4 +100,27 @@ class SouvenirItemService
         $souvenir_category_item->souvenir_category_list_id = $request->category_id;
         $souvenir_category_item->save();
     }
+
+    public function deleteSouvenirItem($id)
+    {
+        DB::table('souvenir_items')->where('id', $id)->delete();
+    }
+
+    public function deleteSouvenirCategoryItem($id)
+    {
+        DB::table('souvenir_category_item')->where('souvenir_item_id', $id)->delete();
+    }
+
+    public function calculatePrice($souvenir_list)
+{
+    $total_amount = 0;
+
+    foreach ($souvenir_list as $souvenir) {
+        $souvenir_array = $souvenir->first();
+        $amount = $souvenir_array->price * $souvenir_array->quantity;
+        $total_amount += $amount;
+    }
+
+    return $total_amount;
+}
 }

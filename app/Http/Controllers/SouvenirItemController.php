@@ -24,8 +24,9 @@ class SouvenirItemController extends Controller
     public function index($travel_id)
     {
         $souvenir_list = $this->souvenirItemService->getSouvenirItems($travel_id);
+        $total_amount = $this->souvenirItemService->calculatePrice($souvenir_list);
 
-        return view('souvenir.index', compact('travel_id', 'souvenir_list'));
+        return view('souvenir.index', compact('travel_id', 'souvenir_list', 'total_amount'));
     }
 
     /**
@@ -98,8 +99,18 @@ class SouvenirItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SouvenirItem $souvenirItem)
+    public function destroy($id, $travel_id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $this->souvenirItemService->deleteSouvenirItem($id);
+            $this->souvenirItemService->deleteSouvenirCategoryItem($id);
+            DB::commit();
+            return redirect()->route('souvenir.index', $travel_id)->with('success', 'お土産が正常に削除されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'お土産の削除中にエラーが発生しました。');
+        }
     }
 }
