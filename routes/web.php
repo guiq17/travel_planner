@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\FacilitySearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SouvenirItemController;
 use App\Models\Travel;
@@ -70,6 +71,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/schedule/edit/{id}/{travel_id}', [ScheduleController::class, 'edit'])->name('schedule.edit');
     Route::post('/schedule/update/{id}/{travel_id}', [ScheduleController::class, 'update'])->name('schedule.update');
     Route::delete('/schedule/{id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
+
+    // api
+    Route::get('travel/facility_search', [FacilitySearchController::class, 'searchFacilities'])->name('facility.search');
 });
 
 require __DIR__.'/auth.php';
