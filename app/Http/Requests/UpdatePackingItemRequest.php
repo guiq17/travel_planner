@@ -33,8 +33,8 @@ class UpdatePackingItemRequest extends FormRequest
                     $travel_id = $this->route('travel_id');
 
                     $exists = DB::table('packing_items')
-                    ->join('packing_category_item', 'packing_category_item.packing_item_id', '=', 'packing_items.id')
-                    ->where('packing_category_item.travel_id', $travel_id)
+                        ->join('packing_category_item', 'packing_category_item.packing_item_id', '=', 'packing_items.id')
+                        ->where('packing_category_item.travel_id', $travel_id)
                         ->where('packing_items.name', $value)
                         ->exists();
 
