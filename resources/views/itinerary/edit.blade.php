@@ -8,7 +8,7 @@
     @include('components.validate_message')
     <div class="flex justify-center items-center min-h-screen" style="background-image: url('/images/main_bg6.jpeg'); background-size: cover;">
         <div class="container mx-auto p-8 bg-white rounded-lg shadow-md max-w-5xl">
-            {{-- 新規しおり登録フォーム --}}
+            {{-- しおり編集フォーム --}}
             <form action="{{ route('travel.update', ['id' => $travel->id]) }}" method="POST" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
                 @csrf
                 @method('PUT')

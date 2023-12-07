@@ -12,11 +12,15 @@
                 <div class="">
                     {{-- カテゴリー選択 --}}
                     <div>
-                        <label for="prefecture">都道府県:</label>
-                        <select id="prefecture" onchange="loadCities()">
+                        <label for="pref">都道府県:</label>
+                        <select id="pref" onchange="loadCities()">
                             <option value="">選択してください</option>
-                            @foreach($areas['areaClasses']['largeClasses'][0]['largeClass'] as $prefecture)
-                                <option value="{{ $prefecture['largeClassCode'] }}">{{ $prefecture['largeClassName'] }}</option>
+                            @foreach($areas[1]['middleClasses'] as $middleClassGroup)
+                                @foreach($middleClassGroup['middleClass'] as $middleClass)
+                                    @if(isset($middleClass['middleClassCode']) && isset($middleClass['middleClassName']))
+                                        <option value="{{ $middleClass['middleClassCode'] }}">{{ $middleClass['middleClassName'] }}</option>
+                                    @endif
+                                @endforeach
                             @endforeach
                         </select>
                     </div>
@@ -35,12 +39,12 @@
                 </div>
                 {{-- 検索ボタン --}}
                 <div class="mt-20">
-                    <a class="inline-block px-4 py-2 mr-2 bg-white text-red-500 border-2 border-red-500 rounded-md hover:bg-red-500 hover:text-white" href="{{ route('packing.index', ['travel_id' => $travel_id]) }}">キャンセル</a>
+                    {{-- <a class="inline-block px-4 py-2 mr-2 bg-white text-red-500 border-2 border-red-500 rounded-md hover:bg-red-500 hover:text-white" href="{{ route('packing.index', ['travel_id' => $travel_id]) }}">キャンセル</a> --}}
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">検索</button>
                 </div>
             </form>
             <div>
-                @if(count($facilities) > 0)
+                {{-- @if(count($facilities) > 0)
                     <ul>
                         @foreach($facilities as $facility)
                             <li>{{ $facility['hotel'][0]['hotelBasicInfo']['hotelName'] }}</li>
@@ -48,7 +52,7 @@
                     </ul>
                 @else
                     <p>No facilities found.</p>
-                @endif
+                @endif --}}
             </div>
         </div>
     </div>
