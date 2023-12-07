@@ -24,6 +24,7 @@ class SouvenirItemService
                         ->select('items.id as item_id', 'items.name as item_name', 'items.quantity as quantity', 'items.price as price', 'items.url', 'items.contents', 'items.image', 'categories.name as category_name')
                         ->join('souvenir_category_lists as categories', 'category_item.souvenir_category_list_id', 'categories.id')
                         ->join('souvenir_items as items', 'category_item.souvenir_item_id', 'items.id')
+                        ->orderBy('categories.id')
                         ->orderBy('items.id')
                         ->get();
         $souvenir_items_list = $souvenir_items_list->groupBy('category_name');
