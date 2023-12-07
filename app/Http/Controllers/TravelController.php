@@ -76,13 +76,14 @@ class TravelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTravelRequest $request, TravelService $travel_service)
+    public function update(UpdateTravelRequest $request, TravelService $travel_service, $id)
     {
         $data = $request->only(['id', 'title', 'start_date', 'end_date']);
+        $travel_id = $id;
 
         DB::beginTransaction();
         try {
-            $travel_service->updateTravel($data);
+            $travel_service->updateTravel($data, $travel_id);
             DB::commit();
             return redirect()->route('travel.list')->with('success', '正常に更新されました。');
         } catch (\Exception $e) {

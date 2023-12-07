@@ -29,10 +29,10 @@ class TravelService
         $travel->save();
     }
 
-    public function updateTravel($data)
+    public function updateTravel($data, $travel_id)
     {
         DB::table('travel')
-            ->where('id', $data['id'])
+            ->where('id', $travel_id)
             ->update([
                 'title' => $data['title'],
                 'start_date' => $data['start_date'],
