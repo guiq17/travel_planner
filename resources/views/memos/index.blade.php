@@ -25,9 +25,10 @@
                         <tr class="py-3">
                             <td class="w-1/3 px-4 py-3 text-center">{{ $memo->note }}</td>
                             <td class="w-1/3 px-4 py-3 text-center"><a href="{{ $memo->url }}" target="_blank">{{ $memo->url }}</a></td>
-                            <td class="w-1/10 px-4 py-3 text-center"><a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.edit', ['id' => $memo->id, 'travel_id' => $travel_id]) }}">編集</a></td>
+                            <td class="w-1/10 px-4 py-3 text-center"><a type="button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.edit', ['id' => $memo->id, 'travel_id' => $travel_id]) }}">編集</a></td>
                             <form action="{{ route('memo.destroy', ['id' => $memo->id, 'travel_id' => $travel_id]) }}" method="POST">
                                 @csrf
+                                @method('DELETE')
                                 <td class="w-1/10 px-4 py-3 text-center"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="submit" onclick='return confirm("このメモを削除しますか？")'>削除</button></td>
                             </form>
                         </tr>
