@@ -78,7 +78,7 @@ class TravelController extends Controller
      */
     public function update(UpdateTravelRequest $request, TravelService $travel_service, $id)
     {
-        $data = $request->only(['id', 'title', 'start_date', 'end_date']);
+        $data = $request->only(['title', 'start_date', 'end_date']);
         $travel_id = $id;
 
         DB::beginTransaction();
