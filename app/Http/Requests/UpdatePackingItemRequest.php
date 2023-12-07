@@ -29,6 +29,19 @@ class UpdatePackingItemRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
+                function ($attribute, $value, $fail) {
+                    $travel_id = $this->route('travel_id');
+
+                    $exists = DB::table('packing_items')
+                    ->join('packing_category_item', 'packing_category_item.packing_item_id', '=', 'packing_items.id')
+                    ->where('packing_category_item.travel_id', $travel_id)
+                        ->where('packing_items.name', $value)
+                        ->exists();
+
+                    if ($exists) {
+                        $fail('指定された:attributeは既に存在します。');
+                    }
+                },
             ],
         ];
     }
@@ -37,9 +50,9 @@ class UpdatePackingItemRequest extends FormRequest
     {
         return [
             'packing_category_id.required' => 'カテゴリーを選択してください。',
-            'name.required' => '品名は必須です。',
-            'name.string' => '品名は文字列で入力してください。',
-            'name.max' => '品名は255文字以内で入力してください。',
+            'packing_item_name.required' => '品名は必須です。',
+            'packing_item_name.string' => '品名は文字列で入力してください。',
+            'packing_item_name.max' => '品名は255文字以内で入力してください。',
         ];
     }
 }
