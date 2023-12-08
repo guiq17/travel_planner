@@ -96,8 +96,20 @@ class TravelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Travel $travel)
+    public function destroy($id, TravelService $travel_service)
     {
-        //
+        $travel_id = $id;
+
+        DB::beginTransaction();
+        try {
+            $travel_service->destroyTravel($id);
+            $travel_service->destroySchedule($travel_id);
+            DB::commit();
+            return redirect()->route('travel.list')->with('success', '正常に削除されました。');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            \Log::error('Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', '削除できませんでした。');
+        }
     }
 }
