@@ -30,7 +30,7 @@
                     </thead>
                     @foreach ($schedules as $schedule)
                         <tr class="border-b">
-                            <td class="px-4 py-3">{{ $schedule->date }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($schedule->date)->format('Y/m/d') }}</td>
                             <td class="px-4 py-3">{{ $schedule->start_time }}</td>
                             <td class="px-4 py-3">{{ $schedule->end_time }}</td>
                             <td class="px-4 py-3">{{ $schedule->event }}</td>

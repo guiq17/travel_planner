@@ -15,10 +15,15 @@
             <form action="{{ route('schedule.update', ['id' => $id, 'travel_id' => $travel_id]) }}" method="POST" class="bg-white p-6 rounded-lg shadow-md" enctype='multipart/form-data'>
                 @csrf
                 <input type="hidden" value="{{ $travel_id }}" name="travel_id">
+                {{-- スケジュール日付 --}}
+                <div class="mb-6">
+                    <label for="date" class="block text-lg font-medium text-gray-700 pd-4">スケジュール日付</label>
+                    <div>{{ \Carbon\Carbon::parse($list->first()->start_date)->format('Y/m/d') }} - {{ \Carbon\Carbon::parse($list->first()->end_date)->format('Y/m/d') }}</div>
+                </div>
                 {{-- 日付 --}}
                 <div class="mb-6">
                     <label for="date" class="block text-lg font-medium text-gray-700 pd-4">日付</label>
-                    <input type="date" name="date" value="{{ old('date', $schedule->date) }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
+                    <input type="date" name="date" value="{{ old('date', $schedule->date) }}" min="{{ $list->first()->start_date }}" max="{{ $list->first()->end_date }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
                 </div>
                 {{-- 開始時間入力 --}}
                 <div class="mb-6">
