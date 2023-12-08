@@ -23,21 +23,30 @@ class StoreSouvenirItemRequest extends FormRequest
      */
     public function rules(): array
     {
-        $travel_id = $this->route('travel_id');
+        // $travel_id = $this->route('travel_id');
+        // $category_id = $this->input('souvenir_category_id');
+        // $souvenir_name = $this->input('souvenir_name');
+
         return [
             'category_id' => 'required|numeric',
             'souvenir_name' => [
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('souvenir_items', 'name')
-                ->where(function ($query) use ($travel_id) {
-                    $query->join('souvenir_category_item', function ($join) use ($travel_id) {
-                            $join->on('souvenir_category_item.souvenir_item_id', '=', 'souvenir_items.id')
-                                 ->where('souvenir_category_item.travel_id', $travel_id);
-                        })
-                        ->where('souvenir_items.name', $this->souvenir_name);
-                })
+                function ($attribute, $value, $fail) {
+                    $travel_id = $this->route('travel_id');
+                    // $category_id = $this->input('category_id');
+
+                    $exists = DB::table('souvenir_items')
+                                ->join('souvenir_category_item', 'souvenir_category_item.souvenir_item_id', '=', 'souvenir_items.id')
+                                ->where('souvenir_category_item.travel_id', $travel_id)
+                                // ->where('souvenir_category_item.souvenir_category_list_id', '=', $category_id)
+                                ->where('souvenir_items.name', $value)
+                                ->exists();
+                    if ($exists) {
+                        $fail('指定された:attributeは既に存在します。');
+                    }
+                },
             ],
             'quantity' => 'required|numeric',
             'price' => 'nullable|numeric',
