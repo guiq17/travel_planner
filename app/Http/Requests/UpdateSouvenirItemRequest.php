@@ -30,6 +30,20 @@ class UpdateSouvenirItemRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
+                function ($attribute, $value, $fail) {
+                    $travel_id = $this->input('travel_id');
+                    $category_id = $this->input('category_id');
+
+                    $exists = DB::table('souvenir_items')
+                                ->join('souvenir_category_item', 'souvenir_category_item.souvenir_item_id', '=', 'souvenir_items.id')
+                                ->where('souvenir_category_item.travel_id', $travel_id)
+                                ->where('souvenir_category_item.souvenir_category_list_id', '=', $category_id)
+                                ->where('souvenir_items.name', $value)
+                                ->exists();
+                    if ($exists) {
+                        $fail('指定された:attributeは既に存在します。');
+                    }
+                },
             ],
             'quantity' => 'required|numeric',
             'price' => 'nullable|numeric',
