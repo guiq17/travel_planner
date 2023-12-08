@@ -6,6 +6,7 @@ use App\Http\Requests\StoreScheduleRequest;
 use App\Http\Requests\UpdateScheduleRequest;
 use App\Models\Schedule;
 use App\Services\ScheduleService;
+use App\Services\TravelService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -13,9 +14,10 @@ class ScheduleController extends Controller
 {
     private $schedule_service;
 
-    public function __construct(ScheduleService $schedule_service)
+    public function __construct(ScheduleService $schedule_service,TravelService $travel_service)
     {
         $this->schedule_service = $schedule_service;
+        $this->travel_service = $travel_service;
     }
     /**
      * Display a listing of the resource.
@@ -32,7 +34,9 @@ class ScheduleController extends Controller
     public function create($travel_id)
     {
         //新規スケジュール作成画面のビュー
-        return view('schedule.create',compact('travel_id'));
+        $user_id = auth()->user()->id;
+        $list = $this->travel_service->getTravelList($user_id)->where('id',$travel_id);
+        return view('schedule.create',compact('travel_id','list'));
     }
 
     /**
@@ -53,7 +57,7 @@ class ScheduleController extends Controller
         try {
             $schedule_service->storeSchedule($travel_id,$date, $start_time, $end_time,$event,$url,$icon);
             DB::commit();
-            return redirect()->route('schedule.create', $travel_id)->with('success', '正常に登録されました。');
+            return redirect()->route('schedule.index', $travel_id)->with('success', '正常に登録されました。');
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error('Error: ' . $e->getMessage());
@@ -74,8 +78,10 @@ class ScheduleController extends Controller
      */
     public function edit($id,$travel_id)
     {
+        $user_id = auth()->user()->id;
+        $list = $this->travel_service->getTravelList($user_id)->where('id',$travel_id);
         $schedule = $this->schedule_service->getSchedule($id);
-        return view('schedule.edit', compact('schedule','id','travel_id'));
+        return view('schedule.edit', compact('schedule','id','travel_id','list'));
     }
 
     /**
@@ -101,7 +107,7 @@ class ScheduleController extends Controller
             Log::error('Error: ' . $e->getMessage());
             Log::error('File: ' . $e->getFile());
             Log::error('Line: ' . $e->getLine());
-            return redirect()->back()->with('error', 'スケジュールの登録中にエラーが発生しました。');
+            return redirect()->back()->with('error', 'スケジュールの更新中にエラーが発生しました。');
         }
     }
 

@@ -15,20 +15,24 @@
             <form action="{{ route('schedule.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md" enctype='multipart/form-data'>
                 @csrf
                 <input type="hidden" value="{{ $travel_id }}" name="travel_id">
+                {{-- スケジュール日付 --}}
+                <div class="mb-6">
+                    <label for="date" class="block text-lg font-medium text-gray-700 pd-4">スケジュール日付</label>
+                    <div>{{ \Carbon\Carbon::parse($list->first()->start_date)->format('Y/m/d') }} - {{ \Carbon\Carbon::parse($list->first()->end_date)->format('Y/m/d') }}</div>
                 {{-- 日付 --}}
                 <div class="mb-6">
                     <label for="date" class="block text-lg font-medium text-gray-700 pd-4">日付</label>
-                    <input type="date" name="date" value="{{ old('date') }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
+                    <input type="date" name="date" value="{{ old('date', $list->first()->start_date) }}" min="{{ $list->first()->start_date }}" max="{{ $list->first()->end_date }}" class="w-full p-2 rounded-md border border-gray-300" placeholder="日付">
                 </div>
                 {{-- 開始時間入力 --}}
                 <div class="mb-6">
                     <label for="start_time" class="block text-lg font-medium text-gray-700">開始時間</label>
-                    <input type="time" name="start_time" value="{{ old('start_date') }}"  class="w-full p-2 rounded-md border border-gray-300" placeholder="開始時間入力">
+                    <input type="time" name="start_time" value="{{ old('start_time') }}"  class="w-full p-2 rounded-md border border-gray-300" placeholder="開始時間入力">
                 </div>
                 {{-- 終了時間入力 --}}
                 <div class="mb-6">
                     <label for="end_time" class="block text-lg font-medium text-gray-700">終了時間</label>
-                    <input type="time" name="end_time" value="{{ old('end_date') }}"  class="w-full p-2 rounded-md border border-gray-300" placeholder="終了時間入力">
+                    <input type="time" name="end_time" value="{{ old('end_time') }}"  class="w-full p-2 rounded-md border border-gray-300" placeholder="終了時間入力">
                 </div>
                 {{-- 内容 --}}
                 <div class="mb-6">
