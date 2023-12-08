@@ -23,10 +23,6 @@ class StoreSouvenirItemRequest extends FormRequest
      */
     public function rules(): array
     {
-        // $travel_id = $this->route('travel_id');
-        // $category_id = $this->input('souvenir_category_id');
-        // $souvenir_name = $this->input('souvenir_name');
-
         return [
             'category_id' => 'required|numeric',
             'souvenir_name' => [
@@ -36,7 +32,6 @@ class StoreSouvenirItemRequest extends FormRequest
                 function ($attribute, $value, $fail) {
                     $travel_id = $this->input('travel_id');
                     $category_id = $this->input('category_id');
-                    // $souvenir_name = $this->input('souvenir_name');
 
                     $exists = DB::table('souvenir_items')
                                 ->join('souvenir_category_item', 'souvenir_category_item.souvenir_item_id', '=', 'souvenir_items.id')

@@ -30,15 +30,6 @@ class UpdateSouvenirItemRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('souvenir_items', 'name')
-                ->where(function ($query) use ($travel_id) {
-                    $query->join('souvenir_category_item', function ($join) use ($travel_id) {
-                            $join->on('souvenir_category_item.souvenir_item_id', '=', 'souvenir_items.id')
-                                 ->where('souvenir_category_item.travel_id', $travel_id);
-                        })
-                        ->where('souvenir_items.name', $this->souvenir_name);
-                })
-                ->ignore($this->route('id')) // 更新時は自身のidを無視する
             ],
             'quantity' => 'required|numeric',
             'price' => 'nullable|numeric',
