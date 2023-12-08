@@ -9,8 +9,12 @@
     @include('components.validate_message')
 
     <div class="max-w-7xl mx-auto pt-4 px-4 sm:px-6 lg:px-8 mb-4 flex justify-between items-center">
-        <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            href="{{ route('souvenir.create', $travel_id) }}">お土産追加</a>
+        <div class="flex items-center space-x-4">
+            <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                href="{{ route('souvenir.create', $travel_id) }}">お土産追加</a>
+            <a type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                href="{{ route('schedule.index', $travel_id) }}">スケジュール一覧へ</a>
+        </div>
         <div class="text-right">
             合計金額：{{ $total_amount }}円
         </div>
