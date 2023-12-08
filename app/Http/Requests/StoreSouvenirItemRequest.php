@@ -34,13 +34,14 @@ class StoreSouvenirItemRequest extends FormRequest
                 'string',
                 'max:255',
                 function ($attribute, $value, $fail) {
-                    $travel_id = $this->route('travel_id');
-                    // $category_id = $this->input('category_id');
+                    $travel_id = $this->input('travel_id');
+                    $category_id = $this->input('category_id');
+                    // $souvenir_name = $this->input('souvenir_name');
 
                     $exists = DB::table('souvenir_items')
                                 ->join('souvenir_category_item', 'souvenir_category_item.souvenir_item_id', '=', 'souvenir_items.id')
                                 ->where('souvenir_category_item.travel_id', $travel_id)
-                                // ->where('souvenir_category_item.souvenir_category_list_id', '=', $category_id)
+                                ->where('souvenir_category_item.souvenir_category_list_id', '=', $category_id)
                                 ->where('souvenir_items.name', $value)
                                 ->exists();
                     if ($exists) {
