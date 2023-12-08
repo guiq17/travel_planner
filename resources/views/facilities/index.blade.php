@@ -15,13 +15,13 @@
                         <label for="pref">都道府県:</label>
                         <select id="pref" onchange="loadCities()">
                             <option value="">選択してください</option>
-                            @foreach($areas[1]['middleClasses'] as $middleClassGroup)
+                            {{-- @foreach($areas[1]['middleClasses'] as $middleClassGroup)
                                 @foreach($middleClassGroup['middleClass'] as $middleClass)
                                     @if(isset($middleClass['middleClassCode']) && isset($middleClass['middleClassName']))
                                         <option value="{{ $middleClass['middleClassCode'] }}">{{ $middleClass['middleClassName'] }}</option>
                                     @endif
                                 @endforeach
-                            @endforeach
+                            @endforeach --}}
                         </select>
                     </div>
                     <div>

@@ -25,12 +25,18 @@ class AreaController extends Controller
         ]);
 
         // レスポンスデータをjson形式で取得
-        $areas = $response->json()['areaClasses']['largeClasses'][0];
+        $areas = $response->json()['areaClasses']['largeClasses'][0][1];
         // dd($areas);
-        // dd($areas[1]['middleClasses']);
-        // dd($areas[1]['middleClasses'][0]['middleClass'][0]['middleClassName']);
-        // dd($areas[0]['largeClassCode']);
-        // dd($areas[0]['largeClassName']);
+        
+        foreach($areas['middleClasses'] as $middleClassGroup){
+            foreach($middleClassGroup as $middleClass){
+                if(isset($middleClass['middleClassCode']) && isset($middleClass['middleClassName'])){
+                    $middleClassCode[] = $middleClass['middleClassCode'];
+                    $middleClassName[] = $middleClass['middleClassName'];
+                    dd($middleClassCode, $middleClassName);
+                }
+            }
+        }
 
         return view('facilities.index', compact('areas'));
     }
