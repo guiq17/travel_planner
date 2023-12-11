@@ -45,6 +45,7 @@
                         </tr>
                         @endforeach
                 </table>
+                <a type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('travel.list') }}">しおり一覧に戻る</a>
             </div>
         </div>
     </div>
