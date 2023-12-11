@@ -11,6 +11,7 @@
                 @include('components.validate_message')
             </div>
             <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.create', $travel_id) }}">メモ追加</a>
+            <a type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('schedule.index', ['travel_id' => $travel_id]) }}">スケジュール一覧へ戻る</a>
                 <table class="min-w-full">
                     <thead>
                         <tr class="border-b">
