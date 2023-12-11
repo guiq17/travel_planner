@@ -21,7 +21,9 @@
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     <option selected disabled>-- 選択してください --</option>
                                     @foreach ($souvenir_categories as $souvenir_category)
-                                        <option value="{{ $souvenir_category->id }}" {{ old('category_id') == $souvenir_category->id ? 'selected' : '' }}>{{ $souvenir_category->name }}
+                                        <option value="{{ $souvenir_category->id }}"
+                                            {{ old('category_id') == $souvenir_category->id ? 'selected' : '' }}>
+                                            {{ $souvenir_category->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -70,13 +72,18 @@
                             <div class="relative">
                                 <label for="image" class="leading-7 text-sm text-gray-600">画像</label>
                                 <input type="file" id="image" name="image" accept="image/*">
+                                @if (old('image'))
+                                    <!-- フォーム再表示時に画像がアップロードされていた場合のプレビュー -->
+                                    <img src="{{ old('image') }}" alt="アップロードされた画像">
+                                @endif
                             </div>
                         </div>
                         <div class="p-2 w-full">
                             <button
                                 class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-700 rounded text-lg">保存</button>
                         </div>
-                        <a href="{{ route('souvenir.index', ['travel_id' => $travel_id])}}" class="hover:underline">← お土産一覧へ</a>
+                        <a href="{{ route('souvenir.index', ['travel_id' => $travel_id]) }}" class="hover:underline">←
+                            お土産一覧へ</a>
                     </div>
                 </div>
             </div>
