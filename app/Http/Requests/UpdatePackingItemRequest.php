@@ -23,25 +23,51 @@ class UpdatePackingItemRequest extends FormRequest
      */
     public function rules(): array
     {
+        $travel_id = $this->route('travel_id');
+        $category_id = $this->input('packing_category_id');
+        $packing_item_id = $this->route('packing_item_id');
         return [
             'packing_category_id' => 'required',
             'packing_item_name' => [
                 'required',
                 'string',
                 'max:255',
-                function ($attribute, $value, $fail) {
-                    $travel_id = $this->route('travel_id');
-                    $category_id = $this->input('packing_category_id');
-                    
-                    $exists = DB::table('packing_items')
+                function ($attribute, $value, $fail) use ($travel_id, $category_id, $packing_item_id) {
+                    $changeCategory = DB::table('packing_items')
                         ->join('packing_category_item', 'packing_category_item.packing_item_id', '=', 'packing_items.id')
                         ->where('packing_category_item.travel_id', $travel_id)
-                        ->where('packing_category_item.packing_category_id', '=', $category_id)
                         ->where('packing_items.name', $value)
+                        ->where('packing_items.packing_category_id', '<>', $category_id)
                         ->exists();
 
-                    if ($exists) {
-                        $fail('指定された:attributeは既に存在します。');
+                    // カテゴリーだけ変更する場合はそのまま登録できる
+                    if ($changeCategory) {
+                        return;
+                    } else {
+                        // カテゴリーを変更せず品名だけ変更する場合は同一カテゴリー内に同一品名がないか確認
+                        $existingInSameCategory = DB::table('packing_items')
+                            ->join('packing_category_item', 'packing_category_item.packing_item_id', '=', 'packing_items.id')
+                            ->where('packing_category_item.travel_id', $travel_id)
+                            ->where('packing_category_item.packing_category_id', $category_id)
+                            ->where('packing_items.name', $value)
+                            ->where('packing_items.id', '<>', $packing_item_id)
+                            ->exists();
+
+                        if ($existingInSameCategory) {
+                            $fail('指定された:attributeは既に存在します。');
+                        }
+
+                        // カテゴリーと品名の両方を変更する場合は他のカテゴリーに同一品名がないか確認
+                        $existingInOtherCategories = DB::table('packing_items')
+                            ->join('packing_category_item', 'packing_category_item.packing_item_id', '=', 'packing_items.id')
+                            ->where('packing_category_item.travel_id', $travel_id)
+                            ->where('packing_category_item.packing_category_id', '<>', $category_id)
+                            ->where('packing_items.name', $value)
+                            ->exists();
+
+                        if ($existingInOtherCategories) {
+                            $fail('指定された:attributeは既に存在します。');
+                        }
                     }
                 },
             ],
