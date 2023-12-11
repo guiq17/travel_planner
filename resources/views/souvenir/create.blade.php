@@ -10,6 +10,7 @@
 
     <form method="POST" action="{{ route('souvenir.store', ['travel_id' => $travel_id]) }}" enctype="multipart/form-data">
         @csrf
+
         <section class="text-gray-600 body-font relative">
             <div class="container px-5 py-24 mx-auto">
                 <div class="lg:w-1/2 md:w-2/3 mx-auto">
@@ -72,10 +73,6 @@
                             <div class="relative">
                                 <label for="image" class="leading-7 text-sm text-gray-600">画像</label>
                                 <input type="file" id="image" name="image" accept="image/*">
-                                @if (old('image'))
-                                    <!-- フォーム再表示時に画像がアップロードされていた場合のプレビュー -->
-                                    <img src="{{ old('image') }}" alt="アップロードされた画像">
-                                @endif
                             </div>
                         </div>
                         <div class="p-2 w-full">

@@ -48,7 +48,7 @@ class StoreSouvenirItemRequest extends FormRequest
             'price' => 'nullable|numeric',
             'url' => 'nullable|url',
             'contents' => 'nullable|max:255',
-            'image' => 'image|max:1024',
+            'image' => 'nullable|image|max:1024',
         ];
     }
 }
