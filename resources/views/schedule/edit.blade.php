@@ -48,63 +48,63 @@
                 {{-- アイコン --}}
                 <div class="mb-6 checkbox-icon">
                 <label for="car">
-                    <input type="radio" name="icon" id="car" value="car" {{ $schedule->icon === 'car' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="car" value="car" {{ old('icon', $schedule->icon) === 'car' ? 'checked' : '' }}>
                     <i class="fas fa-car fa-2x"></i>
                 </label>
                 <label for="subway">
-                    <input type="radio" name="icon" id="subway" value="subway" {{ $schedule->icon === 'subway' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="subway" value="subway" {{ old('icon', $schedule->icon) === 'subway' ? 'checked' : '' }}>
                     <i class="fas fa-subway fa-2x"></i>
                 </label>
                 <label for="plane">
-                    <input type="radio" name="icon" id="plane" value="plane" {{ $schedule->icon === 'plane' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="plane" value="plane" {{ old('icon', $schedule->icon) === 'plane' ? 'checked' : '' }}>
                     <i class="fas fa-plane fa-2x"></i>
                 </label>
                 <label for="ship">
-                    <input type="radio" name="icon" id="ship" value="ship" {{ $schedule->icon === 'ship' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="ship" value="ship" {{ old('icon', $schedule->icon) === 'ship' ? 'checked' : '' }}>
                     <i class="fas fa-ship fa-2x"></i>
                 </label>
                 <label for="bicycle">
-                    <input type="radio" name="icon" id="bicycle" value="bicycle" {{ $schedule->icon === 'bicycle' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="bicycle" value="bicycle" {{ old('icon', $schedule->icon) === 'bicycle' ? 'checked' : '' }}>
                     <i class="fas fa-bicycle fa-2x"></i>
                 </label>
                 <label for="shoe-prints">
-                    <input type="radio" name="icon" id="shoe-prints" value="shoe-prints" {{ $schedule->icon === 'shoe-prints' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="shoe-prints" value="shoe-prints" {{ old('icon', $schedule->icon) === 'shoe-prints' ? 'checked' : '' }}>
                     <i class="fas fa-shoe-prints fa-2x"></i>
                 </label>
                 <label for="shopping-cart">
-                    <input type="radio" name="icon" id="shopping-cart" value="shopping-cart" {{ $schedule->icon === 'shopping-cart' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="shopping-cart" value="shopping-cart" {{ old('icon', $schedule->icon) === 'shopping-cart' ? 'checked' : '' }}>
                     <i class="fas fa-shopping-cart fa-2x"></i>
                 </label>
                 <label for="utensil-spoon">
-                    <input type="radio" name="icon" id="utensil-spoon" value="utensil-spoon" {{ $schedule->icon === 'utensil-spoon' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="utensil-spoon" value="utensil-spoon" {{ old('icon', $schedule->icon) === 'utensil-spoon' ? 'checked' : '' }}>
                     <i class="fas fa-utensil-spoon fa-2x"></i>
                 </label>
                 <label for="coffee">
-                    <input type="radio" name="icon" id="coffee" value="coffee" {{ $schedule->icon === 'coffee' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="coffee" value="coffee" {{ old('icon', $schedule->icon) === 'coffee' ? 'checked' : '' }}>
                     <i class="fas fa-coffee fa-2x"></i>
                 </label>
                 <label for="beer">
-                    <input type="radio" name="icon" id="beer" value="beer" {{ $schedule->icon === 'beer' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="beer" value="beer" {{ old('icon', $schedule->icon) === 'beer' ? 'checked' : '' }}>
                     <i class="fas fa-beer fa-2x"></i>
                 </label>
                 <label for="bed">
-                    <input type="radio" name="icon" id="bed" value="bed" {{ $schedule->icon === 'bed' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="bed" value="bed" {{ old('icon', $schedule->icon) === 'bed' ? 'checked' : '' }}>
                     <i class="fas fa-bed fa-2x"></i>
                 </label>
                 <label for="hot-tub">
-                    <input type="radio" name="icon" id="hot-tub" value="hot-tub" {{ $schedule->icon === 'hot-tub' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="hot-tub" value="hot-tub" {{ old('icon', $schedule->icon) === 'hot-tub' ? 'checked' : '' }}>
                     <i class="fas fa-hot-tub fa-2x"></i>
                 </label>
                 <label for="mountain">
-                    <input type="radio" name="icon" id="mountain" value="mountain" {{ $schedule->icon === 'mountain' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="mountain" value="mountain" {{ old('icon', $schedule->icon) === 'mountain' ? 'checked' : '' }}>
                     <i class="fas fa-mountain fa-2x"></i>
                 </label>
                 <label for="swimmer">
-                    <input type="radio" name="icon" id="swimmer" value="swimmer" {{ $schedule->icon === 'swimmer' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="swimmer" value="swimmer" {{ old('icon', $schedule->icon) === 'swimmer' ? 'checked' : '' }}>
                     <i class="fas fa-swimmer fa-2x"></i>
                 </label>
                 <label for="republican">
-                    <input type="radio" name="icon" id="republican" value="republican" {{ $schedule->icon === 'republican' ? 'checked' : '' }}>
+                    <input type="checkbox" class="icon" name="icon" id="republican" value="republican" {{ old('icon', $schedule->icon) === 'republican' ? 'checked' : '' }}>
                     <i class="fas fa-republican fa-2x"></i>
                 </label>
                 </div>
@@ -116,3 +116,4 @@
         </div>
     </div>
 </x-app-layout>
+<script src="{{ asset('/js/schedule.js') }}"></script>
