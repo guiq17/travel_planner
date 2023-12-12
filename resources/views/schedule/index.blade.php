@@ -11,6 +11,7 @@
         <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('packing.index', $travel_id)}}">持ち物リスト</a>
         <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('souvenir.index', $travel_id) }}">お土産リスト</a>
         <a type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ route('memo.index', $travel_id) }}">その他メモ</a>
+        <a type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('travel.list') }}">しおり一覧に戻る</a>
     </div>
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div class="container px-5 py-5 mx-auto">
@@ -30,7 +31,7 @@
                     </thead>
                     @foreach ($schedules as $schedule)
                         <tr class="border-b">
-                            <td class="px-4 py-3">{{ $schedule->date }}</td>
+                            <td class="px-4 py-3">{{ \Carbon\Carbon::parse($schedule->date)->format('Y/m/d') }}</td>
                             <td class="px-4 py-3">{{ $schedule->start_time }}</td>
                             <td class="px-4 py-3">{{ $schedule->end_time }}</td>
                             <td class="px-4 py-3">{{ $schedule->event }}</td>

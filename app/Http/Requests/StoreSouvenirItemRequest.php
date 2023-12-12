@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class StoreSouvenirItemRequest extends FormRequest
 {
@@ -23,12 +25,30 @@ class StoreSouvenirItemRequest extends FormRequest
     {
         return [
             'category_id' => 'required|numeric',
-            'souvenir_name' => 'required|string',
+            'souvenir_name' => [
+                'required',
+                'string',
+                'max:255',
+                function ($attribute, $value, $fail) {
+                    $travel_id = $this->input('travel_id');
+                    $category_id = $this->input('category_id');
+
+                    $exists = DB::table('souvenir_items')
+                                ->join('souvenir_category_item', 'souvenir_category_item.souvenir_item_id', '=', 'souvenir_items.id')
+                                ->where('souvenir_category_item.travel_id', $travel_id)
+                                ->where('souvenir_category_item.souvenir_category_list_id', '=', $category_id)
+                                ->where('souvenir_items.name', $value)
+                                ->exists();
+                    if ($exists) {
+                        $fail('指定された:attributeは既に存在します。');
+                    }
+                },
+            ],
             'quantity' => 'required|numeric',
             'price' => 'nullable|numeric',
             'url' => 'nullable|url',
             'contents' => 'nullable|max:255',
-            'image' => 'image|max:1024',
+            'image' => 'nullable|image|max:1024',
         ];
     }
 }
