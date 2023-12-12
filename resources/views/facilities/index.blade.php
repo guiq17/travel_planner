@@ -13,26 +13,26 @@
                     {{-- カテゴリー選択 --}}
                     <div>
                         <label for="pref">都道府県:</label>
-                        <select id="pref" onchange="loadCities()">
+                        <select id="pref">
                             <option value="">選択してください</option>
-                            {{-- @foreach($areas[1]['middleClasses'] as $middleClassGroup)
+                            @foreach($areas as $middleClassGroup)
                                 @foreach($middleClassGroup['middleClass'] as $middleClass)
                                     @if(isset($middleClass['middleClassCode']) && isset($middleClass['middleClassName']))
                                         <option value="{{ $middleClass['middleClassCode'] }}">{{ $middleClass['middleClassName'] }}</option>
                                     @endif
                                 @endforeach
-                            @endforeach --}}
+                            @endforeach
                         </select>
                     </div>
                     <div>
                         <label for="city">市区町村:</label>
-                        <select id="city" onchange="loadRegions()">
+                        <select id="city" onchange="loadCities()">
                             <option value="">選択してください</option>
                         </select>
                     </div>
                     <div>
                         <label for="region">地域:</label>
-                        <select id="region">
+                        <select id="region" onchange="loadRegions()">
                             <option value="">選択してください</option>
                         </select>
                     </div>
