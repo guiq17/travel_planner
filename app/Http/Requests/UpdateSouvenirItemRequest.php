@@ -23,7 +23,6 @@ class UpdateSouvenirItemRequest extends FormRequest
      */
     public function rules(): array
     {
-        $travel_id = $this->route('travel_id');
         return [
             'category_id' => 'required|numeric',
             'souvenir_name' => [
@@ -31,7 +30,7 @@ class UpdateSouvenirItemRequest extends FormRequest
                 'string',
                 'max:255',
                 function ($attribute, $value, $fail) {
-                    $travel_id = $this->input('travel_id');
+                    $travel_id = $this->route('travel_id');
                     $category_id = $this->input('category_id');
 
                     $exists = DB::table('souvenir_items')
@@ -40,6 +39,7 @@ class UpdateSouvenirItemRequest extends FormRequest
                                 ->where('souvenir_category_item.souvenir_category_list_id', '=', $category_id)
                                 ->where('souvenir_items.name', $value)
                                 ->exists();
+
                     if ($exists) {
                         $fail('指定された:attributeは既に存在します。');
                     }
