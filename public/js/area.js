@@ -48,6 +48,13 @@ $(document).ready(function () {
                 // 選択してくださいのオプションを追加
                 $('#region').append('<option value="">選択してください</option>');
                 // 取得した地域データをセレクトボックスに追加
+                for (var i = 0; i < data.regions.length; i++) {
+                    $('#region').append('<option value="' + data.regions[i]['code'] + '">' + data.regions[i]['name'] + '</option>');
+                }
+            },
+            error: function (xhr, status, error) {
+                // エラーが発生した場合
+                console.error('Ajax request failed. Status:' + status + ', Error:' + error);
             }
         })
     })
