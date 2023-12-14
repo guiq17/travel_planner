@@ -28,10 +28,42 @@ class AreaService
         return $api_data;
     }
 
-    public function getCitiesByCode($pref_code)
+    public function formatData()
     {
         $api_data = $this->getApiData();
-        $area_data = $this->formatData($api_data);
+        $area_data = [];
+        foreach ($api_data as $item) {
+            $prefecture = [
+                'code' => $item['middleClass'][0]['middleClassCode'],
+                'name' => $item['middleClass'][0]['middleClassName'],
+                'cities' => [],
+            ];
+
+            foreach ($item['middleClass'][1]['smallClasses'] as $city) {
+                $city_data = [
+                    'code' => $city['smallClass'][0]['smallClassCode'],
+                    'name' => $city['smallClass'][0]['smallClassName'],
+                    'regions' => [],
+                ];
+
+                if (isset($city['smallClass'][1]['detailClasses'])) {
+                    foreach ($city['smallClass'][1]['detailClasses'] as $region) {
+                        $city_data['regions'][] = [
+                            'code' => $region['detailClass']['detailClassCode'],
+                            'name' => $region['detailClass']['detailClassName'],
+                        ];
+                    }
+                }
+                $prefecture['cities'][] = $city_data;
+            }
+            $area_data[] = $prefecture;
+        }
+        return $area_data;
+    }
+
+    public function getCitiesByCode($pref_code)
+    {
+        $area_data = $this->formatData();
 
         $cities = [];
         foreach ($area_data as $prefecture) {
@@ -43,34 +75,22 @@ class AreaService
         return $cities;
     }
 
-    public function formatData($api_data)
+    public function getRegionsByCode($city_code)
     {
-        $area_data = [];
-        foreach ($api_data as $item) {
-            $prefecture = [
-                'code' => $item['middleClass'][0]['middleClassCode'],
-                'name' => $item['middleClass'][0]['middleClassName'],
-                'cities' => [],
-                'regions' => [],
-            ];
+        $area_data = $this->formatData();
 
-            foreach ($item['middleClass'][1]['smallClasses'] as $city) {
-                $prefecture['cities'][] = [
-                    'code' => $city['smallClass'][0]['smallClassCode'],
-                    'name' => $city['smallClass'][0]['smallClassName'],
-                ];
-
-                if (isset($city['smallClass'][1]['detailClasses'])){
-                    foreach ($city['smallClass'][1]['detailClasses'] as $region) {
-                        $prefecture['regions'][] = [
-                            'code' => $region['detailClass']['detailClassCode'],
-                            'name' => $region['detailClass']['detailClassName'],
-                        ];
-                    }
+        $regions = [];
+        foreach ($area_data as $prefecture) {
+            foreach ($prefecture['cities'] as $city) {
+                if ($city['code'] === $city_code) {
+                    $regions = $city['regions'];
+                    break;
                 }
             }
-            $area_data[] = $prefecture;
+            if (!empty($regions)) {
+                break;
+            }
         }
-        return $area_data;
+        return $regions;
     }
 }

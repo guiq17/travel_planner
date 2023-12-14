@@ -10,6 +10,8 @@ use App\Http\Controllers\TravelController;
 use App\Http\Controllers\MemoController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PackingItemController;
+use App\Services\AreaService;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,7 +78,8 @@ Route::middleware('auth')->group(function () {
 
     // api
     Route::get('/facility_areas', [AreaController::class, 'getAreas'])->name('facility.areas');
-    Route::get('/getCities', [AreaController::class, 'getCities'])->name('getCities');
+    Route::get('/getCities', [AreaController::class, 'getCities']);
+    Route::get('/getRegions', [AreaController::class, 'getRegions']);
     Route::get('/facility_search', [FacilitySearchController::class, 'searchFacilities'])->name('facility.search');
 });
 

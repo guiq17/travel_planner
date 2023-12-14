@@ -19,7 +19,8 @@ class AreaController extends Controller
     public function getAreas(AreaService $area_service)
     {
         $api_data = $area_service->getApiData();
-        $area_data = $area_service->formatData($api_data);
+        // dd($api_data);
+        $area_data = $area_service->formatData();
         // dd($area_data);
         return view('facilities.index', compact('area_data'));
     }
@@ -29,5 +30,12 @@ class AreaController extends Controller
         $pref_code = $request->pref_code;
         $cities = $area_service->getCitiesByCode($pref_code);
         return response()->json(['cities' => $cities]);
+    }
+
+    public function getRegions(Request $request, AreaService $area_service)
+    {
+        $city_code = $request->city_code;
+        $regions = $area_service->getRegionsByCode($city_code);
+        return response()->json(['regions' => $regions]);
     }
 }
