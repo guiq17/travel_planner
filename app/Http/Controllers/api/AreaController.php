@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Services\AreaService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
 class AreaController extends Controller
 {
-    public function getAreas()
+    private $area_service;
+
+    public function __construct(AreaService $area_service)
     {
-        // apiのエンドポイント
-        $areaApiEndpoint = 'https://app.rakuten.co.jp/services/api/Travel/GetAreaClass/20131024';
+        $this->area_service = $area_service;
+    }
 
-        // アプリケーションIDとアフィリエイトID
-        $applicationId = '1059175046569150354';
-        $affiliateId = '34265887.539eeed4.34265888.b3715a8c';
+    public function getAreas(AreaService $area_service)
+    {
+        $api_data = $area_service->getApiData();
+        $area_data = $area_service->formatData($api_data);
+        // dd($area_data);
+        return view('facilities.index', compact('area_data'));
+    }
 
-        // リクエストパラメータ
-        $response = Http::get($areaApiEndpoint, [
-            'format' => 'json',
-            'formatVersion' => '2',
-            'applicationId' => $applicationId,
-        ]);
-
-        // レスポンスデータをjson形式で取得
-        $areas = $response->json()['areaClasses']['largeClasses'][0][1]['middleClasses'];
-        // dd($areas);
-
-        return view('facilities.index', compact('areas'));
+    public function getCities(Request $request, AreaService $area_service)
+    {
+        $pref_code = $request->pref_code;
+        $cities = $area_service->getCitiesByCode($pref_code);
+        return response()->json(['cities' => $cities]);
     }
 }

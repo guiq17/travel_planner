@@ -12,34 +12,29 @@
                 <div class="">
                     {{-- カテゴリー選択 --}}
                     <div>
-                        <label for="pref">都道府県:</label>
-                        <select id="pref" onchange="loadCities()">
+                        <label for="prefecture">都道府県:</label>
+                        <select id="prefecture" name="prefecture">
                             <option value="">選択してください</option>
-                            @foreach($areas as $middleClassGroup)
-                                @foreach($middleClassGroup['middleClass'] as $middleClass)
-                                    @if(isset($middleClass['middleClassCode']) && isset($middleClass['middleClassName']))
-                                        <option value="{{ $middleClass['middleClassCode'] }}">{{ $middleClass['middleClassName'] }}</option>
-                                    @endif
-                                @endforeach
+                            @foreach($area_data as $prefecture)
+                                <option value="{{ $prefecture['code'] }}">{{ $prefecture['name'] }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div>
                         <label for="city">市区町村:</label>
-                        <select id="city" onchange="loadRegions()">
+                        <select id="city" name="city">
                             <option value="">選択してください</option>
                         </select>
                     </div>
                     <div>
                         <label for="region">地域:</label>
-                        <select id="region">
+                        <select id="region" name="region">
                             <option value="">選択してください</option>
                         </select>
                     </div>
                 </div>
                 {{-- 検索ボタン --}}
                 <div class="mt-20">
-                    {{-- <a class="inline-block px-4 py-2 mr-2 bg-white text-red-500 border-2 border-red-500 rounded-md hover:bg-red-500 hover:text-white" href="{{ route('packing.index', ['travel_id' => $travel_id]) }}">キャンセル</a> --}}
                     <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">検索</button>
                 </div>
             </form>
@@ -57,3 +52,4 @@
         </div>
     </div>
 </x-app-layout>
+<script src="{{ asset('/js/area.js') }}"></script>

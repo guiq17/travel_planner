@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
 
     // api
     Route::get('/facility_areas', [AreaController::class, 'getAreas'])->name('facility.areas');
+    Route::get('/getCities', [AreaController::class, 'getCities'])->name('getCities');
     Route::get('/facility_search', [FacilitySearchController::class, 'searchFacilities'])->name('facility.search');
 });
 
