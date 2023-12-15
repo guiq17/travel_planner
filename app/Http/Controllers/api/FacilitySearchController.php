@@ -3,30 +3,31 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Services\FacilitySearchService;
 use GuzzleHttp\Psr7\HttpFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class FacilitySearchController extends Controller
 {
-    public function searchFacilities($keyword)
+    private $facility_search_service;
+
+    public function __construct(FacilitySearchService $facility_search_service)
     {
-        // apiのエンドポイント
-        $apiEndpoint = 'https://app.rakuten.co.jp/services/api/Travel/SimpleHotelSearch/20170426';
+        $this->facility_search_service = $facility_search_service;
+    }
 
-        // アプリケーションIDとアフィリエイトID
-        $applicationId = '1059175046569150354';
-        $affiliateId = '34265887.539eeed4.34265888.b3715a8c';
+    public function searchFacilities(Request $request, FacilitySearchService $facility_search_service)
+    {
+        $largeClassCode = $request->country;
+        $middleClassCode = $request->prefecture;
+        $smallClassCode = $request->city;
+        $detailClassCode = $request->region;
 
-        // リクエストパラメータ
-        $request = Http::get($apiEndpoint, [
-            'applicationId' => $applicationId,
-            'affiliateId' => $affiliateId,
-            'keyword' => $keyword,
-        ]);
+        $facilities_data = $facility_search_service->getFacilityData($largeClassCode, $middleClassCode, $smallClassCode, $detailClassCode);
+        $paging_info = $facilities_data['pagingInfo'];
+        $hotels = $facilities_data['hotels'];
 
-        $response_data = $request->json();
-
-        return view('facilities.index', ['facilities' => $response_data['hotels']]);
+        return view('facilities.index', compact('paging_info', 'hotels'));
     }
 }

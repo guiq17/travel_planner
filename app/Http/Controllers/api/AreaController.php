@@ -19,9 +19,7 @@ class AreaController extends Controller
     public function getAreas(AreaService $area_service)
     {
         $api_data = $area_service->getApiData();
-        // dd($api_data);
         $area_data = $area_service->formatData();
-        // dd($area_data);
         return view('facilities.index', compact('area_data'));
     }
 

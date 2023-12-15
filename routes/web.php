@@ -77,10 +77,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/schedule/destroy/{id}/{travel_id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
 
     // api
-    Route::get('/facility_areas', [AreaController::class, 'getAreas'])->name('facility.areas');
-    Route::get('/getCities', [AreaController::class, 'getCities']);
-    Route::get('/getRegions', [AreaController::class, 'getRegions']);
-    Route::get('/facility_search', [FacilitySearchController::class, 'searchFacilities'])->name('facility.search');
+    Route::get('/facility/search', [AreaController::class, 'getAreas'])->name('facility.areas');
+    Route::get('/facility/getCities', [AreaController::class, 'getCities']);
+    Route::get('/facility/getRegions', [AreaController::class, 'getRegions']);
+    Route::post('/facility/search', [FacilitySearchController::class, 'searchFacilities'])->name('facility.search');
 });
 
 require __DIR__.'/auth.php';

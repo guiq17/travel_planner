@@ -6,7 +6,7 @@ $(document).ready(function () {
 
         // Ajaxで市町村のデータを取得
         $.ajax({
-            url: "/getCities",
+            url: "/facility/getCities",
             type: "GET",
             data: {
                 pref_code: pref_code
@@ -36,7 +36,7 @@ $(document).ready(function () {
 
         // Ajaxで地域のデータを取得
         $.ajax({
-            url: "getRegions",
+            url: "/facility/getRegions",
             type: "GET",
             data: {
                 city_code: city_code
