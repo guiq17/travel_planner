@@ -41,10 +41,10 @@
             <div>
                 @if(!empty($hotel_info))
                 <div>
-                    <h2>検索結果</h2>
+                    <h1>検索結果</h1>
                     @foreach ($hotel_info as $hotel)
                         <div>
-                            <h3>{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelName'] }}</h3>
+                            <h2 class="my-4">{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelName'] }}</h2>
                             <p>{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelSpecial'] }}</p>
                         </div>
                     @endforeach
