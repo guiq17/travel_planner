@@ -10,6 +10,7 @@
 
     <form method="POST" action="{{ route('souvenir.store', ['travel_id' => $travel_id]) }}" enctype="multipart/form-data">
         @csrf
+
         <section class="text-gray-600 body-font relative">
             <div class="container px-5 py-24 mx-auto">
                 <div class="lg:w-1/2 md:w-2/3 mx-auto">
@@ -21,7 +22,9 @@
                                     class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                     <option selected disabled>-- 選択してください --</option>
                                     @foreach ($souvenir_categories as $souvenir_category)
-                                        <option value="{{ $souvenir_category->id }}" {{ old('category_id') == $souvenir_category->id ? 'selected' : '' }}>{{ $souvenir_category->name }}
+                                        <option value="{{ $souvenir_category->id }}"
+                                            {{ old('category_id') == $souvenir_category->id ? 'selected' : '' }}>
+                                            {{ $souvenir_category->name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -76,7 +79,8 @@
                             <button
                                 class="flex mx-auto text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-700 rounded text-lg">保存</button>
                         </div>
-                        <a href="{{ route('souvenir.index', ['travel_id' => $travel_id])}}" class="hover:underline">← お土産一覧へ</a>
+                        <a href="{{ route('souvenir.index', ['travel_id' => $travel_id]) }}" class="hover:underline">←
+                            お土産一覧へ</a>
                     </div>
                 </div>
             </div>
