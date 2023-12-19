@@ -1,11 +1,14 @@
+@props(['hotelInfo' => [], 'pagingInfo' => []])
 <div>
-    @if(isset($searchResults))
+    @if(isset($hotelInfo))
     <div>
         <h2>検索結果</h2>
         {{-- 検索結果の表示 --}}
-        @foreach ($searchResults as $result)
+        @foreach ($hotelInfo as $hotel)
             <div>
                 {{-- 結果の表示 --}}
+                <h3>{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelName'] }}</h3>
+                <p>{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelSpecial'] }}</p>
             </div>
         @endforeach
 

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Services\AreaService;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use App\View\Components\AreaComponent;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class AreaController extends Controller
 {
@@ -18,9 +21,16 @@ class AreaController extends Controller
 
     public function getAreas(AreaService $area_service)
     {
-        $api_data = $area_service->getApiData();
-        $area_data = $area_service->formatData();
-        return view('facilities.index', compact('area_data'));
+        try {
+            $api_data = $area_service->getApiData();
+            $areaData = $area_service->formatData();
+            return view('facilities.index', [
+                'areaComponent' => AreaComponent::class,
+                'areaData' => $areaData,
+            ]);
+        } catch (Exception $e) {
+            Log::error('API call failed: ' . $e->getMessage());
+        }
     }
 
     public function getCities(Request $request, AreaService $area_service)

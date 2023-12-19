@@ -1,10 +1,11 @@
+@props(['areaData'])
 <div>
     <div>
         <input type="hidden" name="country" value="japan">
         <label for="prefecture">都道府県:</label>
         <select id="prefecture" name="prefecture">
             <option value="">選択してください</option>
-            @foreach($area_data as $prefecture)
+            @foreach($areaData as $prefecture)
                 <option value="{{ $prefecture['code'] }}">{{ $prefecture['name'] }}</option>
             @endforeach
         </select>

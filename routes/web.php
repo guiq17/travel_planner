@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\api\AreaController;
+// use App\Http\Controllers\api\AreaController;
 use App\Http\Controllers\api\FacilitySearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SouvenirItemController;
@@ -10,7 +10,8 @@ use App\Http\Controllers\TravelController;
 use App\Http\Controllers\MemoController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PackingItemController;
-use App\Services\AreaService;
+// use App\Services\AreaService;
+// use App\Services\FacilitySearchService;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,10 +78,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/schedule/destroy/{id}/{travel_id}', [ScheduleController::class, 'destroy'])->name('schedule.destroy');
 
     // api
-    Route::get('/facility/search', [AreaController::class, 'getAreas'])->name('facility.areas');
-    Route::get('/facility/getCities', [AreaController::class, 'getCities']);
-    Route::get('/facility/getRegions', [AreaController::class, 'getRegions']);
-    Route::post('/facility/search', [FacilitySearchController::class, 'searchFacilities'])->name('facility.search');
+    Route::get('/facility/getCities', [FacilitySearchController::class, 'getCities']);
+    Route::get('/facility/getRegions', [FacilitySearchController::class, 'getRegions']);
+    Route::get('/facility/search', [FacilitySearchController::class, 'searchFacilities'])->name('facility.search');
 });
 
 require __DIR__.'/auth.php';

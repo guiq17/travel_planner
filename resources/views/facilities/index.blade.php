@@ -7,10 +7,8 @@
     <div class="flex justify-center items-center min-h-screen" style="background-image: url('/images/main_bg6.jpeg'); background-size: cover;">
         <div class="container mx-auto p-8 bg-white rounded-lg shadow-md max-w-5xl">
             {{-- 施設検索フォーム --}}
-            <form action="{{ route('facility.search') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
-                @csrf
-                <div class="">
-                    {{-- 地区選択 --}}
+            <form action="{{ route('facility.search') }}" method="GET" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
+                <div>
                     <div>
                         <input type="hidden" name="country" value="japan">
                         <label for="prefecture">都道府県:</label>
@@ -41,21 +39,29 @@
             </form>
             {{-- 施設情報の表示 --}}
             <div>
-                {{-- @if(count($facilities) > 0)
-                    <ul>
-                        @foreach($facilities as $facility)
-                            <li>{{ $facility['hotel'][0]['hotelBasicInfo']['hotelName'] }}</li>
-                        @endforeach
-                    </ul>
+                @if(!empty($hotel_info))
+                <div>
+                    <h2>検索結果</h2>
+                    @foreach ($hotel_info as $hotel)
+                        <div>
+                            <h3>{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelName'] }}</h3>
+                            <p>{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelSpecial'] }}</p>
+                        </div>
+                    @endforeach
+                    <div>
+                        @if ($paging_info['page'] > 1)
+                            <a href="{{ route('facility.search', ['page' => $paging_info['page'] - 1]) }}">前のページ</a>
+                        @endif
+                        @if ($paging_info['page'] < $paging_info['pageCount'])
+                            <a href="{{ route('facility.search', ['page' => $paging_info['page'] + 1]) }}">次のページ</a>
+                        @endif
+                    </div>
+                </div>
                 @else
-                    <p>No facilities found.</p>
-                @endif --}}
-            </div>
-            {{-- ページング情報の表示 --}}
-            <div>
-                {{-- <p>総レコード数：{{ $paging_info['recordCount'] }}</p>
-                <p>総ページ数：{{ $paging_info['pageCount'] }}</p>
-                <p>現在のページ：{{ $paging_info['page'] }}</p> --}}
+                    <div>
+                        <p>ホテル情報が見つかりませんでした。</p>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
