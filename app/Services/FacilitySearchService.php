@@ -116,4 +116,39 @@ class FacilitySearchService
         $facilities = $request->json();
         return $facilities;
     }
+
+    public function formatFacilityData($api_data)
+    {
+        $hotel_info = [];
+        foreach ($api_data['hotels'] as $item) {
+            $basic = $item['hotel'][0]['hotelBasicInfo'];
+            if (isset($item['hotel'][0]['hotelBasicInfo'])) {
+                $basic_info = [
+                    'No' => $basic['hotelNo'],
+                    'name' => $basic['hotelName'],
+                    'special' => $basic['hotelSpecial'],
+                    'postalCode' => $basic['postalCode'],
+                    'address' => $basic['address1'].$basic['address2'],
+                    'access' => $basic['access'],
+                ];
+            }
+            
+            if (isset($item['hotel'][1]['hotelRatingInfo'])) {
+                $rating_info = [
+                    'service' => $item['hotel'][1]['hotelRatingInfo']['serviceAverage'],
+                    'location' => $item['hotel'][1]['hotelRatingInfo']['locationAverage'],
+                    'room' => $item['hotel'][1]['hotelRatingInfo']['roomAverage'],
+                    'equipment' => $item['hotel'][1]['hotelRatingInfo']['equipmentAverage'],
+                    'bath' => $item['hotel'][1]['hotelRatingInfo']['bathAverage'],
+                    'meal' => $item['hotel'][1]['hotelRatingInfo']['mealAverage'],
+                ];
+            }
+
+            $hotel_info[] = [
+                'basic_info' => $basic_info,
+                'rating_info' => $rating_info,
+            ];
+        }
+        return $hotel_info;
+    }
 }

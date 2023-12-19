@@ -39,18 +39,19 @@ class FacilitySearchController extends Controller
         $middleClassCode = $request->prefecture;
         $smallClassCode = $request->city;
         $detailClassCode = $request->region;
+        $hotel_info = [];
+        $paging_info = [];
+        $message = '';
 
         try {
             $area_data = $facility_search_service->formatAreaData();
-            $facilities_data = $facility_search_service->getFacilityData($largeClassCode, $middleClassCode, $smallClassCode, $detailClassCode);
-            if(isset($facilities_data['hotels'])){
-                $hotel_info = $facilities_data['hotels'];
-                $paging_info = $facilities_data['pagingInfo'];
+            $api_data = $facility_search_service->getFacilityData($largeClassCode, $middleClassCode, $smallClassCode, $detailClassCode);
+            if(isset($api_data)){
+                $facilities = $facility_search_service->formatFacilityData($api_data);
             } else {
-                $hotel_info = [];
-                $paging_info = [];
+                $message = '施設情報が見つかりませんでした。';
             }
-            return view('facilities.index', compact('area_data', 'hotel_info', 'paging_info'));
+            return view('facilities.index', compact('area_data', 'facilities', 'message'));
         } catch (Exception $e) {
             Log::error('API call failed: ' . $e->getMessage());
         }

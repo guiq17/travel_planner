@@ -1,6 +1,5 @@
 <?php
 
-// use App\Http\Controllers\api\AreaController;
 use App\Http\Controllers\api\FacilitySearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SouvenirItemController;
@@ -10,8 +9,6 @@ use App\Http\Controllers\TravelController;
 use App\Http\Controllers\MemoController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\PackingItemController;
-// use App\Services\AreaService;
-// use App\Services\FacilitySearchService;
 
 /*
 |--------------------------------------------------------------------------

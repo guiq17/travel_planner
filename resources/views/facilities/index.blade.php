@@ -8,7 +8,7 @@
         <div class="container mx-auto p-8 bg-white rounded-lg shadow-md max-w-5xl">
             {{-- 施設検索フォーム --}}
             <form action="{{ route('facility.search') }}" method="GET" class="bg-white p-6 rounded-lg shadow-md bg-gradient-to-b from-indigo-400 to-cyan-400">
-                <div>
+                <div class="">
                     <div>
                         <input type="hidden" name="country" value="japan">
                         <label for="prefecture">都道府県:</label>
@@ -39,27 +39,22 @@
             </form>
             {{-- 施設情報の表示 --}}
             <div>
-                @if(!empty($hotel_info))
-                <div>
-                    <h1>検索結果</h1>
-                    @foreach ($hotel_info as $hotel)
-                        <div>
-                            <h2 class="my-4">{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelName'] }}</h2>
-                            <p>{{ $hotel['hotel'][0]['hotelBasicInfo']['hotelSpecial'] }}</p>
-                        </div>
-                    @endforeach
+                @if(!empty($facilities))
                     <div>
-                        @if ($paging_info['page'] > 1)
-                            <a href="{{ route('facility.search', ['page' => $paging_info['page'] - 1]) }}">前のページ</a>
-                        @endif
-                        @if ($paging_info['page'] < $paging_info['pageCount'])
-                            <a href="{{ route('facility.search', ['page' => $paging_info['page'] + 1]) }}">次のページ</a>
-                        @endif
+                        <h1>検索結果</h1>
+                        @foreach ($facilities as $facility)
+                            <div>
+                                @foreach ($facility['basic_info'] as $key => $val)
+                                    <label for="">{{ $key }}</label>
+                                    <p>{{ $val }}</p>
+                                @endforeach
+                                <hr>
+                            </div>
+                        @endforeach
                     </div>
-                </div>
                 @else
                     <div>
-                        <p>ホテル情報が見つかりませんでした。</p>
+                        <p>{{ $message }}</p>
                     </div>
                 @endif
             </div>
