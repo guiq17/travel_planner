@@ -122,7 +122,8 @@ class FacilitySearchService
         $hotel_info = [];
         foreach ($api_data['hotels'] as $item) {
             $basic = $item['hotel'][0]['hotelBasicInfo'];
-            if (isset($item['hotel'][0]['hotelBasicInfo'])) {
+            $rating = $item['hotel'][1]['hotelRatingInfo'];
+            if (isset($basic)) {
                 $basic_info = [
                     'No' => $basic['hotelNo'],
                     'name' => $basic['hotelName'],
@@ -133,14 +134,14 @@ class FacilitySearchService
                 ];
             }
             
-            if (isset($item['hotel'][1]['hotelRatingInfo'])) {
+            if (isset($rating)) {
                 $rating_info = [
-                    'service' => $item['hotel'][1]['hotelRatingInfo']['serviceAverage'],
-                    'location' => $item['hotel'][1]['hotelRatingInfo']['locationAverage'],
-                    'room' => $item['hotel'][1]['hotelRatingInfo']['roomAverage'],
-                    'equipment' => $item['hotel'][1]['hotelRatingInfo']['equipmentAverage'],
-                    'bath' => $item['hotel'][1]['hotelRatingInfo']['bathAverage'],
-                    'meal' => $item['hotel'][1]['hotelRatingInfo']['mealAverage'],
+                    'service' => $rating['serviceAverage'],
+                    'location' => $rating['locationAverage'],
+                    'room' => $rating['roomAverage'],
+                    'equipment' => $rating['equipmentAverage'],
+                    'bath' => $rating['bathAverage'],
+                    'meal' => $rating['mealAverage'],
                 ];
             }
 

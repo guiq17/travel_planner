@@ -39,8 +39,6 @@ class FacilitySearchController extends Controller
         $middleClassCode = $request->prefecture;
         $smallClassCode = $request->city;
         $detailClassCode = $request->region;
-        $hotel_info = [];
-        $paging_info = [];
         $message = '';
 
         try {
